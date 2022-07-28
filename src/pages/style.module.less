@@ -1,0 +1,57 @@
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.index {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 60px);
+  flex-direction: column;
+
+  .frame-logo {
+    .frame-item {
+      padding: 1.5em;
+      height: 6em;
+      will-change: filter;
+
+      &:nth-child(1):hover {
+        filter: drop-shadow(0 0 2em #646cffaa);
+      }
+
+      &:nth-child(2) {
+        animation: logo-spin infinite 20s linear;
+
+        &:hover {
+          filter: drop-shadow(0 0 2em #61dafbaa);
+        }
+      }
+    }
+  }
+
+  .tool-logo {
+    .tool-item {
+      padding: 1.5em;
+      height: 4em;
+      will-change: filter;
+
+      &:nth-child(1):hover {
+        filter: drop-shadow(0 0 2em #a0a0f5);
+      }
+
+      &:nth-child(2):hover {
+        filter: drop-shadow(0 0 2em #1a2b34);
+      }
+    }
+  }
+
+  .card {
+    text-align: center;
+  }
+}
