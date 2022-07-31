@@ -1,26 +1,24 @@
-import { useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import styles from './style.module.less'
 
 interface INavbar {
   menu: {
     name: string
     path: string
-    element: Element
+    element: JSX.Element
   }[]
 }
 
 const Navbar = (props: INavbar) => {
   const { menu } = props
-  console.log(menu)
 
-  const navigate = useNavigate()
   return (
     <div className={styles['nav-bar']}>
       {menu.map((item) => {
         return (
-          <a key={item.path} onClick={() => navigate(item.path)} className={styles['menu-item']}>
+          <Link className={styles['menu-item']} to={item.path}>
             {item.name}
-          </a>
+          </Link>
         )
       })}
     </div>

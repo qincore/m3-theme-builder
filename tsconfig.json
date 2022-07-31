@@ -17,7 +17,10 @@
     "jsx": "react-jsx",
     "baseUrl": "./",
     "paths": {
-      "@/*": ["src/*"]
+      "@/*": ["src/*"],
+      "@/asset/*": ["src/asset"],
+      "@/components/*": ["src/components"],
+      "@/pages/*": ["src/pages"]
     }
   },
   "include": ["src", ".eslintrc.cjs"],
