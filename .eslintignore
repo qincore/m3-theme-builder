@@ -1,5 +1,1 @@
 vite.config.ts
-commitlint.config.js
-.eslintrc
-.prettierrc
-.stylelintrc
