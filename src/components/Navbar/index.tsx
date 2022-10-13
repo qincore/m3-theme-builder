@@ -16,7 +16,7 @@ const Navbar = (props: INavbar) => {
     <div className={styles['nav-bar']}>
       {menu.map((item) => {
         return (
-          <Link className={styles['menu-item']} to={item.path}>
+          <Link key={item.path} className={styles['menu-item']} to={item.path}>
             {item.name}
           </Link>
         )

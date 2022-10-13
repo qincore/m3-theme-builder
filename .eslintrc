@@ -25,6 +25,17 @@
     "react-hooks",
     "@typescript-eslint"
   ],
+  "settings": {
+    "import/extensions": [".js",".jsx",".ts",".tsx"],
+    "import/parsers": {
+      "@typescript-eslint/parser": [".ts",".tsx"]
+    },
+    "import/resolver": {
+      "node": {
+        "extensions": [".js",".jsx",".ts",".tsx"]
+      }
+    }
+  },
   "rules": {
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
@@ -44,7 +55,7 @@
         "jsx": "never",
         "ts": "never",
         "tsx": "never",
-        "mjs": "never"
+        "": "never"
       }
     ]
   }

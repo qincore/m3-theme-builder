@@ -13,12 +13,13 @@
     "moduleResolution": "Node",
     "resolveJsonModule": true,
     "isolatedModules": true,
+    "types": ["vite-plugin-svgr/client"],
     "noEmit": true,
     "jsx": "react-jsx",
     "baseUrl": "./",
     "paths": {
       "@/*": ["src/*"],
-      "@/asset/*": ["src/asset/*"],
+      "@/assets/*": ["src/assets/*"],
       "@/components/*": ["src/components/*"],
       "@/pages/*": ["src/pages/*"]
     }

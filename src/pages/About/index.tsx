@@ -1,5 +1,7 @@
 import styles from './style.module.less'
 
-export default () => {
+const About = () => {
   return <div className={styles['app-about']}>About Page</div>
 }
+
+export default About
