@@ -9,16 +9,16 @@
     "preview": "vite preview",
     "lint": "eslint src",
     "lint:fix": "eslint --fix src",
-    "format": "prettier --write \"./**/*.{html,tsx,ts,js,json,md,less}\"",
-    "lint:style": "stylelint \"./**/*.{css,less,html}\" --fix",
+    "format": "prettier --write \"src/**/*.{html,tsx,ts,js,json,md,less}\"",
+    "lint:style": "stylelint \"src/**/*.{css,less,html}\" --fix",
     "prepare": "husky install"
   },
   "lint-staged": {
     "*.{ts,tsx,css,less}": [
-      "prettier --write \"./**/*.{html,tsx,ts,js,json,md,less}\""
+      "prettier --write \"src/**/*.{html,tsx,ts,js,json,md,less}\""
     ],
     "*.{css,less}": [
-      "stylelint \"./**/*.{css,less,html}\" --fix"
+      "stylelint \"src/**/*.{css,less,html}\" --fix"
     ],
     "*.{js,jsx,tsx,ts}": [
       "eslint src"
@@ -32,6 +32,8 @@
   },
   "devDependencies": {
     "@babel/core": "^7.19.3",
+    "@commitlint/cli": "^17.1.2",
+    "@commitlint/config-conventional": "^17.1.0",
     "@types/node": "^18.8.5",
     "@types/react": "^18.0.21",
     "@types/react-dom": "^18.0.6",
