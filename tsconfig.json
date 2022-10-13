@@ -23,6 +23,6 @@
       "@/pages/*": ["src/pages/*"]
     }
   },
-  "include": ["src", ".eslintrc.cjs"],
+  "include": ["src", ".eslintrc"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
