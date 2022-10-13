@@ -44,7 +44,6 @@ const Index = () => {
           and save to test HMR
         </p>
       </div>
-      {import.meta.env.MODE}
       <p className="read-the-docs">Click on the Vite and React logos to learn more</p>
     </div>
   )
