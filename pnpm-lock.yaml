@@ -4,6 +4,7 @@ specifiers:
   '@babel/core': ^7.19.3
   '@commitlint/cli': ^17.1.2
   '@commitlint/config-conventional': ^17.1.0
+  '@material/material-color-utilities': ^0.2.0
   '@types/node': ^18.8.5
   '@types/react': ^18.0.21
   '@types/react-dom': ^18.0.6
@@ -42,6 +43,7 @@ specifiers:
   vitest: ^0.24.1
 
 dependencies:
+  '@material/material-color-utilities': 0.2.0
   classnames: 2.3.2
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
@@ -647,6 +649,10 @@ packages:
       '@jridgewell/resolve-uri': 3.1.0
       '@jridgewell/sourcemap-codec': 1.4.14
     dev: true
+
+  /@material/material-color-utilities/0.2.0:
+    resolution: {integrity: sha512-Wux17VAe27abfUyA+yPq/xN7+e6xkj1UFKd9g02KD0HhpM+GRqXLfytJ6nJKhFtliZouQfTcBcOg2cGrt/XbKA==}
+    dev: false
 
   /@nodelib/fs.scandir/2.1.5:
     resolution: {integrity: sha512-vq24Bq3ym5HEQm2NKCr3yXDwjc7vTsEThRDnkp2DK9p1uqLR+DHurm/NOTo0KG7HYHU7eppKZj3MyqYuMBf62g==}

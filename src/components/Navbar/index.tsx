@@ -13,15 +13,20 @@ const Navbar = (props: INavbar) => {
   const { menu } = props
 
   return (
-    <div className={styles['nav-bar']}>
-      {menu.map((item) => {
-        return (
-          <Link key={item.path} className={styles['menu-item']} to={item.path}>
-            {item.name}
-          </Link>
-        )
-      })}
-    </div>
+    <header className={styles.header}>
+      <nav className={styles.nav}>
+        <div className={styles.logo}>logo</div>
+        <menu className={styles.menu}>
+          {menu.map((item) => {
+            return (
+              <Link key={item.path} className={styles.menuItem} to={item.path}>
+                {item.name}
+              </Link>
+            )
+          })}
+        </menu>
+      </nav>
+    </header>
   )
 }
 export default Navbar
