@@ -1,7 +1,7 @@
 {
-  "name": "react_ts_vite_template",
+  "name": "m3-theme-builder",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.0.1",
   "type": "module",
   "scripts": {
     "dev": "vite",

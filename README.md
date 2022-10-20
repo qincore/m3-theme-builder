@@ -1,3 +1,3 @@
-# react_ts_vite_template
+# material3主题生成工具
 
-React+TypeScript+Vite 模板
+material3主题生成工具
