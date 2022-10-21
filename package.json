@@ -26,6 +26,7 @@
   "dependencies": {
     "@material/material-color-utilities": "^0.2.0",
     "classnames": "^2.3.2",
+    "material-icons": "^1.12.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.4.2"

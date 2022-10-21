@@ -3,13 +3,15 @@ import About from '@/pages/About'
 
 const routes = [
   {
-    name: 'index',
+    name: '动态颜色',
     path: '/',
+    icon: 'auto_awesome',
     element: <Index />
   },
   {
-    name: 'about',
+    name: '自定义',
     path: '/about',
+    icon: 'palette',
     element: <About />
   }
 ]
