@@ -1,13 +1,11 @@
 import { Link } from 'react-router-dom'
 import classnames from 'classnames'
+import { useContext } from 'react'
 import styles from './style.module.less'
+import { ThemeContext } from '@/stores/theme'
 
 interface INavbar {
   pathname: string
-  themeMode: {
-    isDark: boolean
-    setMode: (mode: string) => void
-  }
   menu: {
     name: string
     path: string
@@ -17,8 +15,9 @@ interface INavbar {
 }
 
 const Navbar = (props: INavbar) => {
-  const { pathname, menu, themeMode } = props
-  console.log(themeMode.isDark)
+  const { pathname, menu } = props
+  const { isDark, toggle, setThemeColor } = useContext(ThemeContext)
+
   return (
     <header className={styles.header}>
       <nav className={styles.nav}>
@@ -41,12 +40,17 @@ const Navbar = (props: INavbar) => {
           })}
         </menu>
       </nav>
-      <div
-        role="presentation"
-        className={styles.modeButton}
-        onClick={() => themeMode.setMode(themeMode.isDark ? 'light' : 'dark')}
-      >
-        <div className={classnames(styles.modeButtonIconGroup, { [styles.darkMode]: themeMode.isDark })}>
+      <input
+        style={{ marginLeft: '80px' }}
+        onBlur={(e) => {
+          const hexReg = /^#([a-fA-F\d]{6}|[a-fA-F\d]{3})$/
+          if (e.target.value !== '' && e.target.value !== null && hexReg.test(e.target.value)) {
+            setThemeColor({ primary: e.target.value })
+          }
+        }}
+      />
+      <div role="presentation" className={styles.modeButton} onClick={() => toggle()}>
+        <div className={classnames(styles.modeButtonIconGroup, { [styles.darkMode]: isDark })}>
           <span className={classnames('material-icons-outlined', styles.modeButtonIcon)}>dark_mode</span>
           <span className={classnames('material-icons-outlined', styles.modeButtonIcon)}>light_mode</span>
         </div>

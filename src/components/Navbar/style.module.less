@@ -5,26 +5,31 @@
   width: 88px;
   height: 100%;
   transition: background-color 0.3s ease;
-  background-color: var(--md-sys-color-surface);
-  border-right: 1px solid var(--md-sys-color-outline);
+  background-color: rgba(var(--md-sys-color-primary-rgb), 0.05);
   z-index: 99;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
+
   .nav {
     max-width: 1200px;
     margin: 0 auto;
+
     .logo {
       width: 100%;
       height: 42px;
-      background-color: #f3f3f3;
+      color: var(--md-sys-color-on-secondary-container);
+      background-color: var(--md-sys-color-secondary-container);
       line-height: 42px;
       text-align: center;
+      margin: 16px auto;
     }
+
     .menu {
       padding: 0;
       font-size: 12px;
+
       .menuItem {
         display: block;
         margin: 0 10px 14px;
@@ -34,6 +39,7 @@
         border-radius: 50px;
         text-align: center;
         position: relative;
+
         .menuItemIcon {
           display: flex;
           justify-content: center;
@@ -41,6 +47,7 @@
           margin: 0 auto 4px auto;
           width: 56px;
           height: 32px;
+
           &:before {
             position: absolute;
             width: 56px;
@@ -56,6 +63,7 @@
             z-index: -1;
           }
         }
+
         &:hover {
           .menuItemIcon {
             background: linear-gradient(0deg, rgba(68, 71, 70, 0.12), rgba(68, 71, 70, 0.12));
@@ -63,6 +71,7 @@
           }
         }
       }
+
       .menuItemActive {
         .menuItemIcon {
           &:before {
@@ -70,25 +79,29 @@
             transform: scaleX(1);
           }
         }
+
         .menuItemName {
           font-weight: 700;
         }
       }
     }
   }
+
   .modeButton {
     width: 48px;
     height: 48px;
-    margin-bottom: 16px;
     border-radius: 50%;
-    border: 2px solid var(--md-sys-color-outline);
+    border: 1px solid var(--md-sys-color-outline);
     overflow: hidden;
     user-select: none;
+    margin-bottom: 16px;
     cursor: pointer;
+
     .modeButtonIconGroup {
       width: 48px;
       color: var(--md-sys-color-on-secondary-container);
       transition: transform 0.3s ease;
+
       .modeButtonIcon {
         height: 48px;
         line-height: 48px;
@@ -96,6 +109,7 @@
         display: block;
       }
     }
+
     .darkMode {
       transform: translateY(-50%);
     }
