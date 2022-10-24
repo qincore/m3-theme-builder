@@ -43,6 +43,8 @@
     "arrow-body-style": "off",
     "import/prefer-default-export": "off",
     "react/jsx-no-constructed-context-values": "off",
+    "react/no-unused-prop-types": "off",
+    "react/require-default-props": "off",
     "react/function-component-definition": [
       2,
       {

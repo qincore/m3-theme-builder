@@ -5,7 +5,8 @@
   width: 88px;
   height: 100%;
   transition: background-color 0.3s ease;
-  background-color: rgba(var(--md-sys-color-primary-rgb), 0.05);
+  background-color: var(--md-sys-color-surface);
+  background-image: var(--md-sys-color-surface2);
   z-index: 99;
   display: flex;
   flex-direction: column;
@@ -15,15 +16,24 @@
   .nav {
     max-width: 1200px;
     margin: 0 auto;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
 
     .logo {
-      width: 100%;
-      height: 42px;
-      color: var(--md-sys-color-on-secondary-container);
-      background-color: var(--md-sys-color-secondary-container);
-      line-height: 42px;
-      text-align: center;
+      width: 48px;
+      height: 48px;
       margin: 16px auto;
+      padding: 12px;
+      .logoIcon {
+        text-align: center;
+        color: var(--md-sys-color-on-secondary-container);
+        text-align: center;
+      }
+    }
+
+    .appName {
+      display: none;
     }
 
     .menu {
@@ -87,6 +97,10 @@
     }
   }
 
+  .mobileModeButton {
+    display: none;
+  }
+
   .modeButton {
     width: 48px;
     height: 48px;
@@ -98,20 +112,94 @@
     cursor: pointer;
 
     .modeButtonIconGroup {
-      width: 48px;
       color: var(--md-sys-color-on-secondary-container);
       transition: transform 0.3s ease;
 
       .modeButtonIcon {
-        height: 48px;
+        width: 48px;
         line-height: 48px;
         text-align: center;
-        display: block;
+        margin-top: -1px;
+        margin-left: -1px;
+        display: flex;
+        justify-content: center;
       }
     }
 
     .darkMode {
       transform: translateY(-50%);
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .header {
+    position: sticky;
+    width: 100%;
+    height: 64px;
+    flex-direction: unset;
+    padding: 0 4px;
+    background-image: none;
+    &:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: var(--md-sys-color-surface2);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      z-index: -1;
+      pointer-events: none;
+    }
+    .nav {
+      margin: 0;
+      flex-direction: row;
+      .logo {
+      }
+      .appName {
+        display: block;
+        margin: 0;
+        font-size: 20px;
+        color: var(--md-sys-color-on-secondary-container);
+      }
+      .menu {
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        margin: 0;
+        padding: 12px 0 16px 0;
+        display: flex;
+        justify-content: center;
+        background-color: var(--md-sys-color-surface);
+        background-image: var(--md-sys-color-surface2);
+        .menuItem {
+          width: 25%;
+          margin: 0 8%;
+          height: 50px;
+          &:hover {
+            .menuItemIcon {
+              background: transparent;
+            }
+          }
+        }
+      }
+    }
+
+    .mobileModeButton {
+      display: flex;
+      margin-right: 4px;
+    }
+
+    .modeButton {
+      display: none;
+    }
+  }
+  .showSurface {
+    &:before {
+      opacity: 1;
     }
   }
 }

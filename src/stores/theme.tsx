@@ -1,5 +1,5 @@
 import { useEffect, useLayoutEffect, createContext, useMemo } from 'react'
-import { useLocalStorage } from '@/hooks/useLocalStorage'
+import { useLocalStorageState } from 'ahooks'
 import { applyTheme } from '@/utils/theme_utils'
 
 interface IThemeLocalStorage {
@@ -22,10 +22,12 @@ interface IThemeContextProviderProps {
 export const ThemeContext = createContext<IThemeContext>({} as IThemeContext)
 
 export const ThemeContextProvider = ({ children }: IThemeContextProviderProps) => {
-  const [theme, setTheme] = useLocalStorage<IThemeLocalStorage>('theme', {
-    dark: false,
-    color: {
-      primary: '#1677ff'
+  const [theme, setTheme] = useLocalStorageState<IThemeLocalStorage>('theme', {
+    defaultValue: {
+      dark: false,
+      color: {
+        primary: '#1677ff'
+      }
     }
   })
 

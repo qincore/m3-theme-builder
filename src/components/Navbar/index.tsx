@@ -1,8 +1,10 @@
 import { Link } from 'react-router-dom'
 import classnames from 'classnames'
-import { useContext } from 'react'
+import { useContext, useEffect, useState } from 'react'
+import { useScroll } from 'ahooks'
 import styles from './style.module.less'
 import { ThemeContext } from '@/stores/theme'
+import Button from '@/components/Button'
 
 interface INavbar {
   pathname: string
@@ -16,12 +18,28 @@ interface INavbar {
 
 const Navbar = (props: INavbar) => {
   const { pathname, menu } = props
-  const { isDark, toggle, setThemeColor } = useContext(ThemeContext)
+  const { isDark, toggle } = useContext(ThemeContext)
+
+  const [showSurface, setShowSurface] = useState(false)
+
+  const scroll = useScroll(document)
+
+  useEffect(() => {
+    if (scroll && scroll.top > 64) {
+      setShowSurface(true)
+    }
+    if (scroll && scroll.top < 64) {
+      setShowSurface(false)
+    }
+  }, [scroll])
 
   return (
-    <header className={styles.header}>
+    <header className={classnames(styles.header, { [styles.showSurface]: showSurface })}>
       <nav className={styles.nav}>
-        <div className={styles.logo}>logo</div>
+        <div className={styles.logo}>
+          <span className={classnames('material-icons-outlined', styles.logoIcon)}>mood</span>
+        </div>
+        <div className={styles.appName}>M3 Theme Builder</div>
         <menu className={styles.menu}>
           {menu.map((item) => {
             const isActive = item.path === pathname
@@ -40,14 +58,15 @@ const Navbar = (props: INavbar) => {
           })}
         </menu>
       </nav>
-      <input
-        style={{ marginLeft: '80px' }}
-        onBlur={(e) => {
-          const hexReg = /^#([a-fA-F\d]{6}|[a-fA-F\d]{3})$/
-          if (e.target.value !== '' && e.target.value !== null && hexReg.test(e.target.value)) {
-            setThemeColor({ primary: e.target.value })
-          }
-        }}
+      <Button
+        className={styles.mobileModeButton}
+        type="text"
+        onClick={toggle}
+        icon={
+          <span className={classnames('material-icons-outlined', styles.hamburgButtonIcon)}>
+            {isDark ? 'light_mode' : 'dark_mode'}
+          </span>
+        }
       />
       <div role="presentation" className={styles.modeButton} onClick={() => toggle()}>
         <div className={classnames(styles.modeButtonIconGroup, { [styles.darkMode]: isDark })}>

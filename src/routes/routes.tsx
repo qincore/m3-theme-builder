@@ -1,5 +1,5 @@
 import Index from '@/pages'
-import About from '@/pages/About'
+import About from '@/pages/Custom'
 
 const routes = [
   {
@@ -10,7 +10,7 @@ const routes = [
   },
   {
     name: '自定义',
-    path: '/about',
+    path: '/custom',
     icon: 'palette',
     element: <About />
   }

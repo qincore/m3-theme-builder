@@ -1,6 +1,13 @@
 .app-main {
-  padding-left: 88px;
   min-height: 100vh;
+  padding: 12px 12px 0 100px;
   transition: background-color 0.3s ease;
   background-color: var(--md-sys-color-background);
+}
+
+@media screen and (max-width: 768px) {
+  .app-main {
+    min-height: calc(100vh - 64px);
+    padding: 0 16px 78px 16px;
+  }
 }
