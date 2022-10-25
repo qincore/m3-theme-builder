@@ -13,6 +13,7 @@ specifiers:
   '@vitejs/plugin-react': ^2.1.0
   ahooks: ^3.7.2
   classnames: ^2.3.2
+  color-blend: ^4.0.0
   eslint: ^8.25.0
   eslint-config-airbnb: ^19.0.4
   eslint-config-airbnb-typescript: ^17.0.0
@@ -48,6 +49,7 @@ dependencies:
   '@material/material-color-utilities': 0.2.0
   ahooks: 3.7.2_react@18.2.0
   classnames: 2.3.2
+  color-blend: 4.0.0
   material-icons: 1.12.0
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
@@ -1377,6 +1379,11 @@ packages:
       strip-ansi: 6.0.1
       wrap-ansi: 7.0.0
     dev: true
+
+  /color-blend/4.0.0:
+    resolution: {integrity: sha512-fYODTHhI/NG+B5GnzvuL3kiFrK/UnkUezWFTgEPBTY5V+kpyfAn95Vn9sJeeCX6omrCOdxnqCL3CvH+6sXtIbw==}
+    engines: {node: '>=10.0.0'}
+    dev: false
 
   /color-convert/1.9.3:
     resolution: {integrity: sha512-QfAUtd+vFdAtFQcC8CCyYt1fYWxSqAiK2cSD6zDB8N3cpsEBAvRxp9zOGg6G/SHHJYAT88/az/IuDGALsNVbGg==}
