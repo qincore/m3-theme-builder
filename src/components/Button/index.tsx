@@ -3,7 +3,7 @@ import classnames from 'classnames'
 import styles from './style.module.less'
 
 interface IButtonProps {
-  children?: JSX.Element
+  children?: ReactNode
   type?: 'primary' | 'secondary' | 'text'
   icon?: ReactNode
   className?: string | string[]

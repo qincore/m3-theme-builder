@@ -1,0 +1,26 @@
+.uploadImage {
+  width: 100%;
+  height: 100%;
+  background-color: var(--md-sys-color-surface1);
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  user-select: none;
+  .sourceImg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+  }
+  .uploadBtn {
+    position: relative;
+    z-index: 1;
+  }
+  input[type='file'] {
+    display: none;
+  }
+}

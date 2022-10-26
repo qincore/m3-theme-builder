@@ -1,9 +1,10 @@
-import { useContext, useEffect, useMemo } from 'react'
+import { ChangeEvent, useContext, useEffect } from 'react'
 import { hexFromArgb, sourceColorFromImage } from '@material/material-color-utilities'
 import { useLocalStorageState } from 'ahooks'
 import styles from './style.module.less'
 import PageTitleCard from '@/components/PageTitleCard'
 import { ThemeContext } from '@/stores/theme'
+import UploadImage from '@/components/uploadImage'
 
 const Index = () => {
   const description = '通过获取图片主色调自动生成主题方案'
@@ -15,17 +16,16 @@ const Index = () => {
   const el = document.getElementById('sourceImg')
   const { setThemeColor } = useContext(ThemeContext)
 
-  const checkImage = async (url: string) => {
-    const res = await fetch(url)
-    const buff = await res.blob()
-    return buff.type.startsWith('image/')
+  const fileChange = (e: ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files) {
+      const file = e.target.files[0]
+      const reader = new FileReader()
+      reader.onload = () => {
+        setImage({ url: reader.result as string })
+      }
+      reader.readAsDataURL(file)
+    }
   }
-
-  const imageValid = useMemo(() => {
-    return checkImage(image.url)
-  }, [image])
-
-  console.log(imageValid)
 
   useEffect(() => {
     async function getColor() {
@@ -48,21 +48,8 @@ const Index = () => {
         <div className={styles.titleBlock}>
           <PageTitleCard pageTitle="动态颜色" pageDescription={description} />
         </div>
-        <div className={styles.uploadImg}>
-          <img
-            style={{ display: imageValid ? 'none' : 'block' }}
-            id="sourceImg"
-            className={styles.sourceImg}
-            src={image.url}
-            alt="sourceImg"
-          />
-          <input
-            className={styles.uploadBtn}
-            type="file"
-            onChange={(e) => {
-              setImage(URL.createObjectURL(e.target.files[0]))
-            }}
-          />
+        <div className={styles.uploadBlock}>
+          <UploadImage imgUrl={image.url} onChange={(e) => fileChange(e)} />
         </div>
       </div>
     </div>
