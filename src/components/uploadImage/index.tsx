@@ -11,7 +11,14 @@ const uploadImage = (props: IUploadImageProps) => {
   const { imgUrl, onChange } = props
   return (
     <div className={styles.uploadImage}>
-      <img id="sourceImg" className={styles.sourceImg} src={imgUrl} alt="sourceImg" draggable={false} />
+      <img
+        id="sourceImg"
+        style={{ opacity: imgUrl === '' ? 0 : 1 }}
+        className={styles.sourceImg}
+        src={imgUrl}
+        alt="sourceImg"
+        draggable={false}
+      />
       <Button type="secondary" className={styles.uploadBtn}>
         {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
         <label style={{ width: '100%', height: '100%', lineHeight: '38px', cursor: 'pointer' }} htmlFor="imageInput">
