@@ -7,7 +7,7 @@ import { alphaFromArgb, blueFromArgb, greenFromArgb, redFromArgb } from '@materi
  * @param colorMode 输出的颜色模式 argb ｜ rgba ｜ hex.
  * @return 混合后 ARGB 数字 ｜ rgba rgba(x,x,x,x) ｜ hex #ff0844.
  */
-export const blendColors = (back: number, fore: number, colorMode: string): string | number => {
+export const blendColors = (back: number, fore: number, colorMode: 'argb' | 'rgba' | 'hex'): string | number => {
   const backRGBA = {
     r: redFromArgb(back),
     g: greenFromArgb(back),
@@ -49,16 +49,9 @@ export const hexFromArgb = (argb: number): string => {
   const r = redFromArgb(argb)
   const g = greenFromArgb(argb)
   const b = blueFromArgb(argb)
-  const outParts = [r.toString(16), g.toString(16), b.toString(16), a.toString(16)]
+  const rgbaArr = [r.toString(16), g.toString(16), b.toString(16), a.toString(16)]
 
-  // eslint-disable-next-line no-restricted-syntax
-  for (const [i, part] of outParts.entries()) {
-    if (part.length === 1) {
-      outParts[i] = `0${part}`
-    }
-  }
-
-  return `#${outParts.join('')}`
+  return `#${rgbaArr.map((item) => (item.length === 1 ? `0${item}` : item)).join('')}`
 }
 
 /**
