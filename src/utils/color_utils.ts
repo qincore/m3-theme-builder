@@ -36,7 +36,7 @@ export const blendColors = (back: number, fore: number, colorMode: 'argb' | 'rgb
 
   // ARGB
   // eslint-disable-next-line no-bitwise
-  return ((a << 24) | ((r & 255) << 16) | ((g & 255) << 8) | (b & 255)) >>> 0
+  return (((a * 255) << 24) | ((r & 255) << 16) | ((g & 255) << 8) | (b & 255)) >>> 0
 }
 
 /**

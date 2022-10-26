@@ -5,8 +5,7 @@
   width: 88px;
   height: 100%;
   transition: background-color 0.3s ease;
-  background-color: var(--md-sys-color-surface);
-  background-image: var(--md-sys-color-surface2);
+  background-color: var(--md-sys-color-surface2);
   z-index: 99;
   display: flex;
   flex-direction: column;
@@ -139,20 +138,7 @@
     height: 64px;
     flex-direction: unset;
     padding: 0 4px;
-    background-image: none;
-    &:before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-image: var(--md-sys-color-surface2);
-      opacity: 0;
-      transition: opacity 0.3s ease;
-      z-index: -1;
-      pointer-events: none;
-    }
+    background-color: var(--md-sys-color-surface);
     .nav {
       margin: 0;
       flex-direction: row;
@@ -173,8 +159,7 @@
         padding: 12px 0 16px 0;
         display: flex;
         justify-content: center;
-        background-color: var(--md-sys-color-surface);
-        background-image: var(--md-sys-color-surface2);
+        background-color: var(--md-sys-color-surface2);
         .menuItem {
           width: 25%;
           margin: 0 8%;
@@ -198,8 +183,6 @@
     }
   }
   .showSurface {
-    &:before {
-      opacity: 1;
-    }
+    background-color: var(--md-sys-color-surface2);
   }
 }
