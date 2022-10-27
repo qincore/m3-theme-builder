@@ -1,4 +1,11 @@
-import { argbFromHex, themeFromSourceColor, Theme } from '@material/material-color-utilities'
+import {
+  argbFromHex,
+  themeFromSourceColor,
+  Theme,
+  redFromArgb,
+  greenFromArgb,
+  blueFromArgb
+} from '@material/material-color-utilities'
 import { ISurfaceProps, Surface } from '@/utils/surface_scheme'
 import { hexFromArgb } from '@/utils/color_utils'
 
@@ -76,8 +83,11 @@ const addToken = (scheme: ISchemeProps | ISurfaceProps, type: string): string =>
   // eslint-disable-next-line no-restricted-syntax
   for (const [key, value] of Object.entries(scheme)) {
     const token = key.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase()
-    const color = hexFromArgb(value)
-    css += `--md-${type}-color-${token}: ${color};\n`
+    const colorHex = hexFromArgb(value)
+    const r = redFromArgb(value)
+    const g = greenFromArgb(value)
+    const b = blueFromArgb(value)
+    css += `--md-${type}-color-${token}-rgb: ${r},${g},${b};\n--md-${type}-color-${token}: ${colorHex};\n`
   }
 
   return css

@@ -1,0 +1,46 @@
+.themePalette {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  gap: 12px;
+  margin-bottom: 12px;
+  .themePaletteItem {
+    font-size: 14px;
+    .tokenColor {
+      width: 100%;
+      height: 60px;
+      border-radius: 16px;
+      border: 1px solid rgba(var(--md-sys-color-outline-variant-rgb), 0.4);
+    }
+    .tokenName {
+      margin-top: 2px;
+      padding: 4px;
+      color: var(--md-sys-color-on-background);
+    }
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .themePalette {
+    .themePaletteItem {
+      font-size: 12px;
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .themePalette {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .themePalette {
+    grid-template-columns: repeat(2, 1fr);
+    .themePaletteItem {
+      .tokenColor {
+        border-radius: 12px;
+      }
+    }
+  }
+}
