@@ -20,14 +20,22 @@ const uploadImage = (props: IUploadImageProps) => {
         draggable={false}
       />
       <div className={styles.uploadContent}>
-        <Button type="secondary" className={styles.uploadBtn}>
+        <Button
+          type="secondary"
+          className={styles.uploadBtn}
+          icon={
+            <span style={{ marginRight: '10px' }} className="material-icons-outlined">
+              wallpaper
+            </span>
+          }
+        >
           {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
           <label style={{ width: '100%', height: '100%', lineHeight: '38px', cursor: 'pointer' }} htmlFor="imageInput">
             喂我图给你好康的
           </label>
         </Button>
         <input id="imageInput" type="file" accept={'image/*'} onChange={(e) => onChange?.(e)} />
-        <div className={styles.uploadTips}>我只吃不大于600kb的图片</div>
+        <div className={styles.uploadTips}>^_^ 我只吃不大于2MB的图片哦</div>
       </div>
     </div>
   )

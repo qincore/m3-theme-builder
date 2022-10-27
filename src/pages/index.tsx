@@ -1,30 +1,30 @@
 import { ChangeEvent, useContext, useEffect } from 'react'
-import { hexFromArgb } from '@material/material-color-utilities'
 import { useLocalStorageState } from 'ahooks'
+import { FastAverageColor } from 'fast-average-color'
 import styles from './style.module.less'
 import PageTitleCard from '@/components/PageTitleCard'
 import { ThemeContext } from '@/stores/theme'
 import UploadImage from '@/components/uploadImage'
-import { sourceColorFromImage } from '@/utils/image_utils'
 import ThemePalette from '@/components/ThemePalette'
 import { THEME } from '@/constants/scheme'
 
 const Index = () => {
+  const fac = new FastAverageColor()
   const description = '通过获取图片主色调自动生成主题方案'
   const [image, setImage] = useLocalStorageState('image', {
     defaultValue: {
       url: ''
     }
   })
-  const el = document.getElementById('sourceImg')
+  // const el = document.getElementById('sourceImg')
   const { setThemeColor, isDark } = useContext(ThemeContext)
 
   const fileChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
       const file = e.target.files[0]
-      if (file.size / 1000 > 600) {
+      if (file.size / 1024 > 2048) {
         // eslint-disable-next-line no-alert
-        alert('啊啊～，图片大于600kb了！我吃不下！！')
+        alert('啊啊～，图片大于2MB了！我吃不下！！')
         return
       }
       const reader = new FileReader()
@@ -37,12 +37,12 @@ const Index = () => {
 
   useEffect(() => {
     ;(async () => {
-      if (el) {
-        const source = await sourceColorFromImage(el as HTMLImageElement)
-        setThemeColor({ primary: hexFromArgb(source) })
-      }
+      // @ts-ignore
+      const source = await fac.getColorAsync(image.url)
+      // const source = await sourceColorFromImage(el as HTMLImageElement)
+      setThemeColor({ primary: source.hex })
     })()
-  }, [el, image])
+  }, [image])
 
   return (
     <div className={styles.index}>

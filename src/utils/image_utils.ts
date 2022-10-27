@@ -20,7 +20,7 @@ const getImageData = async (image: HTMLImageElement): Promise<Uint8ClampedArray>
       canvas.width = image.width
       canvas.height = image.height
       context.drawImage(image, 0, 0)
-      resolve(context.getImageData(0, 0, image.width, image.height).data)
+      return resolve(context.getImageData(0, 0, image.width, image.height).data)
     }
   })
 }
@@ -58,10 +58,13 @@ const getPixelArray = (imageData: Uint8ClampedArray, quality: number): number[] 
 export async function sourceColorFromImage(image: HTMLImageElement, quality = 10): Promise<number> {
   // 获取图片数据
   const imageData = await getImageData(image)
+  console.log('内层拿到imageData', imageData)
   // 获取图片像素数据 argb
   const pixelArray = getPixelArray(imageData, quality)
+  console.log('内层拿到pixelArray', pixelArray)
   // 获取主色
   const result = QuantizerCelebi.quantize(pixelArray, 128)
   const ranked = Score.score(result)
+  console.log('内层拿到主色', ranked[0])
   return ranked[0]
 }

@@ -23,13 +23,28 @@
     align-items: center;
     flex-direction: column;
     .uploadTips {
-      margin-top: 10px;
-      color: var(--md-ref-palette-primary-primary90);
-      text-shadow: 0 0 4px rgba(var(--md-sys-color-shadow-rgb), 0.3);
-      font-size: 14px;
+      position: absolute;
+      bottom: 14px;
+      right: 14px;
+      padding: 5px 10px;
+      border-radius: 20px;
+      background-color: var(--md-sys-color-tertiary-container);
+      color: var(--md-sys-color-on-tertiary-container);
+      font-size: 12px;
     }
     input[type='file'] {
       display: none;
+    }
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .uploadImage {
+    .uploadContent {
+      .uploadTips {
+        font-size: 8px;
+        padding: 4px 8px;
+      }
     }
   }
 }
