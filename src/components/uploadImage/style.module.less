@@ -25,12 +25,20 @@
     .uploadTips {
       position: absolute;
       bottom: 14px;
-      right: 14px;
+      left: 50%;
+      transform: translateX(-50%);
       padding: 5px 10px;
       border-radius: 20px;
       background-color: var(--md-sys-color-tertiary-container);
       color: var(--md-sys-color-on-tertiary-container);
       font-size: 12px;
+    }
+    label {
+      line-height: 38px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
     }
     input[type='file'] {
       display: none;

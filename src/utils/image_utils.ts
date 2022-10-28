@@ -7,8 +7,9 @@ import { Score } from '@material/material-color-utilities/dist/score/score'
  * @param image img 元素
  * @return 图片原始数据
  */
-const getImageData = async (image: HTMLImageElement): Promise<Uint8ClampedArray> => {
+const getImageData = async (image: string): Promise<Uint8ClampedArray> => {
   return new Promise((resolve, reject) => {
+    const img = new Image()
     const canvas = document.createElement('canvas')
     const context = canvas.getContext('2d', { willReadFrequently: true })
     if (!context) {
@@ -16,12 +17,13 @@ const getImageData = async (image: HTMLImageElement): Promise<Uint8ClampedArray>
       return
     }
     // eslint-disable-next-line no-param-reassign
-    image.onload = () => {
-      canvas.width = image.width
-      canvas.height = image.height
-      context.drawImage(image, 0, 0)
-      return resolve(context.getImageData(0, 0, image.width, image.height).data)
+    img.onload = () => {
+      canvas.width = img.width
+      canvas.height = img.height
+      context.drawImage(img, 0, 0)
+      resolve(context.getImageData(0, 0, img.width, img.height).data)
     }
+    img.src = image
   })
 }
 
@@ -55,16 +57,13 @@ const getPixelArray = (imageData: Uint8ClampedArray, quality: number): number[] 
  * @param quality 采样基数 默认 10（越大越快-精度差、越小越慢-精度高）
  * @return 图片主色
  */
-export async function sourceColorFromImage(image: HTMLImageElement, quality = 10): Promise<number> {
+export const colorFromImageUrl = async (image: string, quality = 10): Promise<number> => {
   // 获取图片数据
   const imageData = await getImageData(image)
-  console.log('内层拿到imageData', imageData)
   // 获取图片像素数据 argb
   const pixelArray = getPixelArray(imageData, quality)
-  console.log('内层拿到pixelArray', pixelArray)
   // 获取主色
   const result = QuantizerCelebi.quantize(pixelArray, 128)
   const ranked = Score.score(result)
-  console.log('内层拿到主色', ranked[0])
   return ranked[0]
 }

@@ -1,23 +1,25 @@
-import { ChangeEvent, useContext, useEffect } from 'react'
+import { ChangeEvent, useContext, useEffect, useRef } from 'react'
 import { useLocalStorageState } from 'ahooks'
-import { FastAverageColor } from 'fast-average-color'
+import { hexFromArgb } from '@material/material-color-utilities'
 import styles from './style.module.less'
 import PageTitleCard from '@/components/PageTitleCard'
 import { ThemeContext } from '@/stores/theme'
-import UploadImage from '@/components/uploadImage'
+import UploadImage from '@/components/UploadImage'
 import ThemePalette from '@/components/ThemePalette'
 import { THEME } from '@/constants/scheme'
+import { colorFromImageUrl } from '@/utils/image_utils'
+import Dialog, { IDialogRef } from '@/components/Dialog'
+import Button from '@/components/Button'
 
 const Index = () => {
-  const fac = new FastAverageColor()
   const description = '通过获取图片主色调自动生成主题方案'
   const [image, setImage] = useLocalStorageState('image', {
     defaultValue: {
       url: ''
     }
   })
-  // const el = document.getElementById('sourceImg')
   const { setThemeColor, isDark } = useContext(ThemeContext)
+  const dialogRef = useRef<IDialogRef>(null)
 
   const fileChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
@@ -37,10 +39,8 @@ const Index = () => {
 
   useEffect(() => {
     ;(async () => {
-      // @ts-ignore
-      const source = await fac.getColorAsync(image.url)
-      // const source = await sourceColorFromImage(el as HTMLImageElement)
-      setThemeColor({ primary: source.hex })
+      const source = await colorFromImageUrl(image.url)
+      setThemeColor({ primary: hexFromArgb(source) })
     })()
   }, [image])
 
@@ -62,7 +62,16 @@ const Index = () => {
             return <ThemePalette key={index} data={item} />
           })}
         </div>
+        <Button
+          onClick={() => {
+            console.log(1)
+            dialogRef?.current?.show()
+          }}
+        >
+          打开
+        </Button>
       </section>
+      <Dialog ref={dialogRef} />
     </div>
   )
 }
