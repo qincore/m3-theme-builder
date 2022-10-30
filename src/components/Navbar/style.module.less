@@ -26,7 +26,7 @@
       padding: 12px;
       .logoIcon {
         text-align: center;
-        color: var(--md-sys-color-on-secondary-container);
+        color: var(--md-sys-color-on-background);
         text-align: center;
       }
     }
@@ -142,13 +142,11 @@
     .nav {
       margin: 0;
       flex-direction: row;
-      .logo {
-      }
       .appName {
         display: block;
         margin: 0;
         font-size: 20px;
-        color: var(--md-sys-color-on-secondary-container);
+        color: var(--md-sys-color-on-background);
       }
       .menu {
         position: fixed;
@@ -173,12 +171,16 @@
         }
       }
     }
-
-    .mobileModeButton {
+    .mobileNavRight {
       display: flex;
-      margin-right: 4px;
+      .mobileModeButton {
+        display: flex;
+        margin-right: 4px;
+      }
+      .mobileAboutButton {
+        margin-right: 4px;
+      }
     }
-
     .modeButton {
       display: none;
     }

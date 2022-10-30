@@ -1,4 +1,4 @@
-import { ChangeEvent, useContext, useEffect, useRef } from 'react'
+import { ChangeEvent, useContext, useEffect } from 'react'
 import { useLocalStorageState } from 'ahooks'
 import { hexFromArgb } from '@material/material-color-utilities'
 import styles from './style.module.less'
@@ -8,8 +8,7 @@ import UploadImage from '@/components/UploadImage'
 import ThemePalette from '@/components/ThemePalette'
 import { THEME } from '@/constants/scheme'
 import { colorFromImageUrl } from '@/utils/image_utils'
-import Dialog, { IDialogRef } from '@/components/Dialog'
-import Button from '@/components/Button'
+import { Dialog } from '@/components/Dialog'
 
 const Index = () => {
   const description = '通过获取图片主色调自动生成主题方案'
@@ -19,14 +18,17 @@ const Index = () => {
     }
   })
   const { setThemeColor, isDark } = useContext(ThemeContext)
-  const dialogRef = useRef<IDialogRef>(null)
 
   const fileChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
       const file = e.target.files[0]
       if (file.size / 1024 > 2048) {
         // eslint-disable-next-line no-alert
-        alert('啊啊～，图片大于2MB了！我吃不下！！')
+        Dialog.show({
+          icon: 'error_outline',
+          title: '温馨提示',
+          content: '请选择小于 2MB 的图片'
+        })
         return
       }
       const reader = new FileReader()
@@ -62,16 +64,7 @@ const Index = () => {
             return <ThemePalette key={index} data={item} />
           })}
         </div>
-        <Button
-          onClick={() => {
-            console.log(1)
-            dialogRef?.current?.show()
-          }}
-        >
-          打开
-        </Button>
       </section>
-      <Dialog ref={dialogRef} />
     </div>
   )
 }

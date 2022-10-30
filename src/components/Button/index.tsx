@@ -1,4 +1,4 @@
-import { CSSProperties, ReactNode } from 'react'
+import React, { CSSProperties, ReactNode } from 'react'
 import classnames from 'classnames'
 import styles from './style.module.less'
 
@@ -8,25 +8,25 @@ interface IButtonProps {
   icon?: ReactNode
   className?: string | string[]
   style?: CSSProperties
-  shape?: 'circle' | 'round' | 'square'
-  onClick?: () => void
+  size?: 'large' | 'small' | 'normal'
+  onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void
 }
 
 const Button = (props: IButtonProps) => {
   const defaultProps = {
     htmlType: 'button',
-    type: 'primary'
+    type: 'primary',
+    size: 'normal'
   }
-  const { children, icon, className, type, onClick } = { ...defaultProps, ...props }
+  const { children, icon, className, type, size, style, onClick } = { ...defaultProps, ...props }
+
   return (
     <button
-      className={classnames(styles.button, className, {
-        [styles.primary]: type === 'primary',
-        [styles.secondary]: type === 'secondary',
-        [styles.text]: type === 'text',
+      style={style ? { ...style } : {}}
+      className={classnames(styles.button, styles[type], styles[size], className, {
         [styles.noChildren]: !children
       })}
-      onClick={() => onClick?.()}
+      onClick={(e) => onClick?.(e)}
       type="button"
     >
       {icon && icon}

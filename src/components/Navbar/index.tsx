@@ -5,6 +5,7 @@ import { useScroll } from 'ahooks'
 import styles from './style.module.less'
 import { ThemeContext } from '@/stores/theme'
 import Button from '@/components/Button'
+import { Dialog } from '@/components/Dialog'
 
 interface INavbar {
   pathname: string
@@ -33,6 +34,13 @@ const Navbar = (props: INavbar) => {
     }
   }, [scroll])
 
+  const aboutApp = () => {
+    Dialog.show({
+      title: '关于',
+      content: 'md3主题编辑器'
+    })
+  }
+
   return (
     <header className={classnames(styles.header, { [styles.showSurface]: showSurface })}>
       <nav className={styles.nav}>
@@ -58,16 +66,26 @@ const Navbar = (props: INavbar) => {
           })}
         </menu>
       </nav>
-      <Button
-        className={styles.mobileModeButton}
-        type="text"
-        onClick={toggle}
-        icon={
-          <span className={classnames('material-icons-outlined', styles.hamburgButtonIcon)}>
-            {isDark ? 'light_mode' : 'dark_mode'}
-          </span>
-        }
-      />
+      <div className={styles.mobileNavRight}>
+        <Button
+          className={styles.mobileModeButton}
+          type="text"
+          onClick={toggle}
+          style={{ color: 'var(--md-sys-color-on-background)' }}
+          icon={
+            <span className={classnames('material-icons-outlined', styles.ModeButtonIcon)}>
+              {isDark ? 'light_mode' : 'dark_mode'}
+            </span>
+          }
+        />
+        <Button
+          className={styles.mobileAboutButton}
+          type="text"
+          onClick={aboutApp}
+          style={{ color: 'var(--md-sys-color-on-background)' }}
+          icon={<span className={classnames('material-icons-outlined', styles.aboutButtonIcon)}>more_vert</span>}
+        />
+      </div>
       <div role="presentation" className={styles.modeButton} onClick={() => toggle()}>
         <div className={classnames(styles.modeButtonIconGroup, { [styles.darkMode]: isDark })}>
           <span className={classnames('material-icons-outlined', styles.modeButtonIcon)}>dark_mode</span>
