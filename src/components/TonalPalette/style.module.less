@@ -1,0 +1,48 @@
+.tonalPalette {
+  width: 100%;
+  margin-bottom: 12px;
+  font-size: 14px;
+  .tonalPaletteToken {
+    margin-bottom: 2px;
+    padding: 4px;
+    color: var(--md-sys-color-on-background);
+  }
+  .tonalPaletteGroup {
+    display: grid;
+    grid-template-columns: repeat(13, 1fr);
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid rgba(var(--md-sys-color-outline-variant-rgb), 0.4);
+    .tonalPaletteItem {
+      height: 58px;
+      text-align: center;
+      line-height: 58px;
+    }
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .tonalPalette {
+    font-size: 12px;
+  }
+}
+
+//@media screen and (max-width: 768px) {
+//  .themePalette {
+//    grid-template-columns: repeat(4, 1fr);
+//  }
+//}
+//
+@media screen and (max-width: 550px) {
+  .tonalPalette {
+    margin-bottom: 0;
+    .tonalPaletteGroup {
+      grid-template-columns: repeat(1, 1fr);
+      border-radius: 12px;
+      .tonalPaletteItem {
+        //height: 28px;
+        //line-height: 28px;
+      }
+    }
+  }
+}

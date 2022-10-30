@@ -121,7 +121,7 @@ export const applyTheme = (source: string, options?: { surface?: boolean; palett
       // eslint-disable-next-line no-restricted-syntax
       for (const tone of tones) {
         const color = hexFromArgb(palette.tone(tone))
-        token += `--md-ref-palette-${paletteKey}-${paletteKey}${tone}: ${color};\n`
+        token += `--md-ref-palette-${paletteKey}-${tone}: ${color};\n`
       }
     }
     setStyle('palettes', `:root{\n${token}}`)

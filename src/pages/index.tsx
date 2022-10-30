@@ -6,9 +6,10 @@ import PageTitleCard from '@/components/PageTitleCard'
 import { ThemeContext } from '@/stores/theme'
 import UploadImage from '@/components/UploadImage'
 import ThemePalette from '@/components/ThemePalette'
-import { THEME } from '@/constants/scheme'
+import { PALETTE, SURFACE, THEME } from '@/constants/scheme'
 import { colorFromImageUrl } from '@/utils/image_utils'
 import { Dialog } from '@/components/Dialog'
+import TonalPalette from '@/components/TonalPalette'
 
 const Index = () => {
   const description = '通过获取图片主色调自动生成主题方案'
@@ -17,7 +18,7 @@ const Index = () => {
       url: ''
     }
   })
-  const { setThemeColor, isDark } = useContext(ThemeContext)
+  const { setThemeColor } = useContext(ThemeContext)
 
   const fileChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
@@ -57,11 +58,25 @@ const Index = () => {
         </div>
       </div>
       <section className={styles.themePalette}>
-        <h2>{isDark ? '暗黑' : '亮色'}主题</h2>
+        <h2>Theme</h2>
         <div className={styles.themePaletteRow}>
           {THEME.map((item, index) => {
             // eslint-disable-next-line react/no-array-index-key
             return <ThemePalette key={index} data={item} />
+          })}
+        </div>
+        <h2>Surface</h2>
+        <div className={styles.themePaletteRow}>
+          {SURFACE.map((item, index) => {
+            // eslint-disable-next-line react/no-array-index-key
+            return <ThemePalette key={index} data={item} />
+          })}
+        </div>
+        <h2>Palette</h2>
+        <div className={styles.tonalPalette}>
+          {PALETTE.map((item, index) => {
+            // eslint-disable-next-line react/no-array-index-key
+            return <TonalPalette key={index} data={item} />
           })}
         </div>
       </section>

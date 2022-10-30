@@ -176,3 +176,79 @@ export const THEME = [
     }
   ]
 ]
+
+export const SURFACE = [
+  [
+    {
+      token: 'Surface 0',
+      hex: '--md-sys-color-surface0',
+      rgb: '--md-sys-color-surface0-rgb',
+      content: '--md-sys-color-on-surface'
+    },
+    {
+      token: 'Surface 1',
+      hex: '--md-sys-color-surface1',
+      rgb: '--md-sys-color-surface1-rgb',
+      content: '--md-sys-color-on-surface'
+    },
+    {
+      token: 'Surface 2',
+      hex: '--md-sys-color-surface2',
+      rgb: '--md-sys-color-surface2-rgb',
+      content: '--md-sys-color-on-surface'
+    },
+    {
+      token: 'Surface 3',
+      hex: '--md-sys-color-surface3',
+      rgb: '--md-sys-color-surface3-rgb',
+      content: '--md-sys-color-on-surface'
+    },
+    {
+      token: 'Surface 4',
+      hex: '--md-sys-color-surface4',
+      rgb: '--md-sys-color-surface4-rgb',
+      content: '--md-sys-color-on-surface'
+    },
+    {
+      token: 'Surface 5',
+      hex: '--md-sys-color-surface5',
+      rgb: '--md-sys-color-surface5-rgb',
+      content: '--md-sys-color-on-surface'
+    }
+  ]
+]
+
+const tonals = [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 95, 99, 100].reverse()
+
+export const PALETTE = [
+  {
+    token: 'Primary',
+    hex: '--md-ref-palette-primary',
+    tonals
+  },
+  {
+    token: 'Secondary',
+    hex: '--md-ref-palette-secondary',
+    tonals
+  },
+  {
+    token: 'Tertiary',
+    hex: '--md-ref-palette-tertiary',
+    tonals
+  },
+  {
+    token: 'Error',
+    hex: '--md-ref-palette-error',
+    tonals
+  },
+  {
+    token: 'Neutral',
+    hex: '--md-ref-palette-neutral',
+    tonals
+  },
+  {
+    token: 'Neutral Variant',
+    hex: '--md-ref-palette-neutral-variant',
+    tonals
+  }
+]

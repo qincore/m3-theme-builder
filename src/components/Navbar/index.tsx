@@ -6,6 +6,7 @@ import styles from './style.module.less'
 import { ThemeContext } from '@/stores/theme'
 import Button from '@/components/Button'
 import { Dialog } from '@/components/Dialog'
+import { FOLLOWS } from '@/constants/follows'
 
 interface INavbar {
   pathname: string
@@ -37,7 +38,28 @@ const Navbar = (props: INavbar) => {
   const aboutApp = () => {
     Dialog.show({
       title: '关于',
-      content: 'md3主题编辑器'
+      content: (
+        <>
+          <div>Material 主题生成器</div>
+          <br />
+          <div>生成web使用的Material 3主题，包含surface高程颜色</div>
+          <br />
+          <div style={{ fontSize: '14px', opacity: 0.9 }}>@走心叁次方ZEIR</div>
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'space-between',
+              width: '65%',
+              marginLeft: '-8px',
+              fontSize: '32px'
+            }}
+          >
+            {FOLLOWS.map((follow) => (
+              <Button key={follow.name} onClick={() => window.open(follow.url)} type="text" icon={follow.icon} />
+            ))}
+          </div>
+        </>
+      )
     })
   }
 
@@ -47,7 +69,7 @@ const Navbar = (props: INavbar) => {
         <div className={styles.logo}>
           <span className={classnames('material-icons-outlined', styles.logoIcon)}>mood</span>
         </div>
-        <div className={styles.appName}>M3 Theme Builder</div>
+        <div className={styles.appName}>Material 主题生成器</div>
         <menu className={styles.menu}>
           {menu.map((item) => {
             const isActive = item.path === pathname
