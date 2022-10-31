@@ -32,10 +32,14 @@ const Dialog = (props: IDialogProps) => {
   }, [])
 
   useEffect(() => {
+    let timer: number | undefined
     if (visible) {
-      setTimeout(() => {
+      timer = setTimeout(() => {
         setEn(true)
       }, 20)
+    }
+    return () => {
+      clearTimeout(timer)
     }
   }, [visible])
 

@@ -1,16 +1,14 @@
 import styles from './style.module.less'
-import beianImage from '@/assets/beian.png'
-import icpImage from '@/assets/icp.png'
+import { BEIAN } from '@/constants/beian'
 
 const Footer = () => {
   return (
     <div className={styles.footer}>
-      <a href="https://www.miit.gov.cn">
-        <img src={icpImage} alt="蜀ICP备20006272号-1" /> 蜀ICP备20006272号-1
-      </a>
-      <a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=51012402000444">
-        <img src={beianImage} alt="川公网安备 51012402000444号" /> 川公网安备 51012402000444号
-      </a>
+      {BEIAN.map((item) => (
+        <a key={item.url} href={item.url} target="_blank" rel="noreferrer">
+          <img src={item.img} alt="蜀ICP备20006272号-1" /> {item.name}
+        </a>
+      ))}
     </div>
   )
 }

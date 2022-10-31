@@ -11,11 +11,23 @@
       height: 60px;
       border-radius: 16px;
       border: 1px solid rgba(var(--md-sys-color-outline-variant-rgb), 0.4);
+      cursor: pointer;
     }
     .tokenName {
       margin-top: 2px;
       padding: 4px;
       color: var(--md-sys-color-on-background);
+    }
+  }
+}
+
+.colorDetail {
+  .colorValue {
+    display: flex;
+    align-items: center;
+
+    span {
+      font-size: 18px;
     }
   }
 }
@@ -40,6 +52,7 @@
     .themePaletteItem {
       .tokenColor {
         border-radius: 12px;
+        cursor: none;
       }
     }
   }

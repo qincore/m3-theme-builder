@@ -218,7 +218,7 @@ export const SURFACE = [
   ]
 ]
 
-const tonals = [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 95, 99, 100].reverse()
+const tonals = [100, 99, 95, 90, 80, 70, 60, 50, 40, 30, 20, 10, 0]
 
 export const PALETTE = [
   {
