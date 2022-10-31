@@ -29,7 +29,15 @@ const uploadImage = (props: IUploadImageProps) => {
             喂我图给你好康的
           </label>
         </Button>
-        <input id="imageInput" type="file" accept={'image/*'} onChange={(e) => onChange?.(e)} />
+        <input
+          id="imageInput"
+          type="file"
+          accept={'image/*'}
+          onChange={(e) => {
+            onChange?.(e)
+            e.target.value = ''
+          }}
+        />
         <div className={styles.uploadTips}>^_^ 我只吃小于2MB的图片哦</div>
       </div>
     </div>
