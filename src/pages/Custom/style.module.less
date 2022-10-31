@@ -1,4 +1,11 @@
 .app-custom {
   font-size: 50px;
+  min-height: 100vh;
   color: var(--md-sys-color-on-background);
+}
+
+@media screen and (max-width: 550px) {
+  .app-custom {
+    min-height: calc(100vh - 78px - 64px);
+  }
 }

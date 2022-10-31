@@ -42,7 +42,7 @@ const Index = () => {
 
   useEffect(() => {
     ;(async () => {
-      const source = await colorFromImageUrl(image.url)
+      const source = await colorFromImageUrl(image.url, 5)
       setThemeColor({ primary: hexFromArgb(source) })
     })()
   }, [image])
