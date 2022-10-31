@@ -55,7 +55,13 @@ const Navbar = (props: INavbar) => {
             }}
           >
             {FOLLOWS.map((follow) => (
-              <Button key={follow.name} onClick={() => window.open(follow.url)} type="text" icon={follow.icon} />
+              <Button
+                key={follow.name}
+                onClick={() => window.open(follow.url)}
+                type="text"
+                icon={follow.icon}
+                className={styles.followBtn}
+              />
             ))}
           </div>
         </>
