@@ -2,7 +2,7 @@ import { IMenuConstants } from '@/types/constants'
 
 export const MENU: IMenuConstants[] = [
   {
-    name: '动态颜色页',
+    name: '动态颜色',
     path: '/dynamic',
     icon: 'auto_awesome',
     children: [
