@@ -64,10 +64,8 @@ const Dynamic = () => {
           <UploadImage imgUrl={image.url} onChange={(e) => fileChange(e)} />
         </div>
       </div>
-      <section className={styles.themePalette}>
-        <SecNavbar menus={secMenus as IMenuConstants[]} pathname={pathname} />
-        {children}
-      </section>
+      <SecNavbar menus={secMenus as IMenuConstants[]} pathname={pathname} />
+      <section className={styles.themePalette}>{children}</section>
     </div>
   )
 }

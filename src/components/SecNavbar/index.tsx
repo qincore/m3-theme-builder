@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import classnames from 'classnames'
-import styles from '@/components/Navbar/style.module.less'
+import styles from './style.module.less'
 import { IMenuConstants } from '@/types/constants'
 
 interface IRouteTabsProps {
@@ -11,19 +11,19 @@ interface IRouteTabsProps {
 const SecNavbar = (props: IRouteTabsProps) => {
   const { menus, pathname } = props
   return (
-    <div className={styles.routeTabs}>
+    <div className={styles.secNavbar}>
       {menus.map((menu) => {
         const isActive = menu.path === pathname
         return (
           <Link
             key={menu.path}
-            className={classnames(styles.routeTabItem, { [styles.menuItemActive]: isActive })}
+            className={classnames(styles.menuItem, { [styles.menuItemActive]: isActive })}
             to={menu.path}
           >
             <span className={classnames(`material-icons${isActive ? '' : '-outlined'}`, styles.menuItemIcon)}>
               {menu.icon}
             </span>
-            <div className={styles.routeTabItemName}>{menu.name}</div>
+            <div className={styles.menuItemName}>{menu.name}</div>
           </Link>
         )
       })}
