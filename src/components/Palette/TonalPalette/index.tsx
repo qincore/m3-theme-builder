@@ -1,4 +1,4 @@
-import { ITonalPaletteConstants } from '@/types/scheme-constants'
+import { ITonalPaletteConstants } from '@/types/constants'
 import styles from './style.module.less'
 
 interface ITonalPaletteProps {

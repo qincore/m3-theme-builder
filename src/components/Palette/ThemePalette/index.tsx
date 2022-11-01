@@ -1,5 +1,5 @@
 import styles from './style.module.less'
-import { IThemeConstants } from '@/types/scheme-constants'
+import { IThemeConstants } from '@/types/constants'
 import { Dialog } from '@/components/Dialog'
 import { getCssGlobalVar } from '@/utils/getCssGlobalVar'
 import Clipboard from '@/components/Clipboard'

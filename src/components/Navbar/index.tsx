@@ -7,11 +7,11 @@ import { ThemeContext } from '@/stores/theme'
 import Button from '@/components/Button'
 import { Dialog } from '@/components/Dialog'
 import { FOLLOWS } from '@/constants/follows'
-import { IRoutes } from '@/routes/routes'
+import { IMenuConstants } from '@/types/constants'
 
 interface INavbar {
   pathname: string
-  menu: IRoutes[]
+  menu: IMenuConstants[]
 }
 
 const Navbar = (props: INavbar) => {

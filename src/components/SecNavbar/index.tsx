@@ -1,29 +1,29 @@
-import { Link, useLocation } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import classnames from 'classnames'
 import styles from '@/components/Navbar/style.module.less'
-import { IRoutes } from '@/routes/routes'
+import { IMenuConstants } from '@/types/constants'
 
 interface IRouteTabsProps {
-  routes: IRoutes[]
+  menus: IMenuConstants[]
+  pathname: string
 }
 
-const RouteTabs = (props: IRouteTabsProps) => {
-  const { routes } = props
-  const { pathname } = useLocation()
+const SecNavbar = (props: IRouteTabsProps) => {
+  const { menus, pathname } = props
   return (
     <div className={styles.routeTabs}>
-      {routes.map((route) => {
-        const isActive = route.path === pathname
+      {menus.map((menu) => {
+        const isActive = menu.path === pathname
         return (
           <Link
-            key={route.path}
+            key={menu.path}
             className={classnames(styles.routeTabItem, { [styles.menuItemActive]: isActive })}
-            to={route.path}
+            to={menu.path}
           >
             <span className={classnames(`material-icons${isActive ? '' : '-outlined'}`, styles.menuItemIcon)}>
-              {route.icon}
+              {menu.icon}
             </span>
-            <div className={styles.routeTabItemName}>{route.name}</div>
+            <div className={styles.routeTabItemName}>{menu.name}</div>
           </Link>
         )
       })}
@@ -31,4 +31,4 @@ const RouteTabs = (props: IRouteTabsProps) => {
   )
 }
 
-export default RouteTabs
+export default SecNavbar

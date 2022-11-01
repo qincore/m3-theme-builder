@@ -1,8 +1,9 @@
-import { Navigate } from 'react-router-dom'
+import { RouteObject } from 'react-router-dom'
 import Dynamic from '@/pages/Dynamic'
 import Palette from '@/components/Palette'
 import Custom from '@/pages/Custom'
 import Code from '@/components/Code'
+import Layout from '@/layout'
 
 export interface IRoutes {
   name?: string
@@ -12,49 +13,38 @@ export interface IRoutes {
   children?: IRoutes[]
 }
 
-const routes: IRoutes[] = [
+const routes: RouteObject[] = [
   {
-    name: '首页',
     path: '/',
-    element: <Navigate to="/dynamic" />
-  },
-  {
-    name: '动态颜色页',
-    path: '/dynamic',
-    icon: 'auto_awesome',
-    element: <Dynamic />,
+    element: <Layout />,
     children: [
       {
-        name: '动态颜色色板',
         path: '/dynamic',
-        icon: 'palette',
-        element: <Palette />
+        element: <Dynamic />,
+        children: [
+          {
+            path: '/dynamic',
+            element: <Palette />
+          },
+          {
+            path: '/dynamic/code',
+            element: <Code />
+          }
+        ]
       },
       {
-        name: '动态颜色代码',
-        path: '/dynamic/code',
-        icon: 'code',
-        element: <Code />
-      }
-    ]
-  },
-  {
-    name: '自定义',
-    path: '/custom',
-    icon: 'tune',
-    element: <Custom />,
-    children: [
-      {
-        name: '动态颜色色板',
         path: '/custom',
-        icon: 'palette',
-        element: <Palette />
-      },
-      {
-        name: '动态颜色代码',
-        path: '/custom/code',
-        icon: 'code',
-        element: <Code />
+        element: <Custom />,
+        children: [
+          {
+            path: '/custom',
+            element: <Palette />
+          },
+          {
+            path: '/custom/code',
+            element: <Code />
+          }
+        ]
       }
     ]
   }

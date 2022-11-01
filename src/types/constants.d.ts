@@ -10,3 +10,10 @@ export interface ITonalPaletteConstants {
   hex: string
   tonals: number[]
 }
+
+export interface IMenuConstants {
+  name: string
+  path: string
+  icon: string
+  children?: IMenuConstants[]
+}
