@@ -1,4 +1,4 @@
-import { useLayoutEffect, createContext, useMemo } from 'react'
+import { useLayoutEffect, createContext, useMemo, useEffect } from 'react'
 import { useLocalStorageState } from 'ahooks'
 import { applyTheme } from '@/utils/theme_utils'
 
@@ -53,14 +53,16 @@ export const ThemeContextProvider = ({ children }: IThemeContextProviderProps) =
   const updateTheme = () => {
     const Tones = [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 95, 99, 100]
     const themeCss = applyTheme(theme.color.primary, { surface: true, paletteTones: Tones })
+
     setTheme({ ...theme, css: themeCss })
   }
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     updateTheme()
   }, [theme.color])
 
   useLayoutEffect(() => {
+    updateTheme()
     const systemMode = window.matchMedia('(prefers-color-scheme: dark)')
     toggleClass(theme.dark || systemMode.matches)
     systemMode.addEventListener('change', (e) => {
