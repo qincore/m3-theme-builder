@@ -7,15 +7,11 @@ import { ThemeContext } from '@/stores/theme'
 import Button from '@/components/Button'
 import { Dialog } from '@/components/Dialog'
 import { FOLLOWS } from '@/constants/follows'
+import { IRoutes } from '@/routes/routes'
 
 interface INavbar {
   pathname: string
-  menu: {
-    name: string
-    path: string
-    icon: string
-    element: JSX.Element
-  }[]
+  menu: IRoutes[]
 }
 
 const Navbar = (props: INavbar) => {
@@ -77,21 +73,23 @@ const Navbar = (props: INavbar) => {
         </div>
         <div className={styles.appName}>Material 主题生成器</div>
         <menu className={styles.menu}>
-          {menu.map((item) => {
-            const isActive = item.path === pathname
-            return (
-              <Link
-                key={item.path}
-                className={classnames(styles.menuItem, { [styles.menuItemActive]: isActive })}
-                to={item.path}
-              >
-                <span className={classnames(`material-icons${isActive ? '' : '-outlined'}`, styles.menuItemIcon)}>
-                  {item.icon}
-                </span>
-                <div className={styles.menuItemName}>{item.name}</div>
-              </Link>
-            )
-          })}
+          {menu
+            .filter((r) => r.path !== '/')
+            .map((item) => {
+              const isActive = pathname.includes(item.path)
+              return (
+                <Link
+                  key={item.path}
+                  className={classnames(styles.menuItem, { [styles.menuItemActive]: isActive })}
+                  to={item.path}
+                >
+                  <span className={classnames(`material-icons${isActive ? '' : '-outlined'}`, styles.menuItemIcon)}>
+                    {item.icon}
+                  </span>
+                  <div className={styles.menuItemName}>{item.name}</div>
+                </Link>
+              )
+            })}
         </menu>
       </nav>
       <div className={styles.mobileNavRight}>

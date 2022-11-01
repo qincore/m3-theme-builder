@@ -1,17 +1,17 @@
-import { ChangeEvent, useContext, useEffect } from 'react'
+import { ChangeEvent, useContext, useEffect, useMemo } from 'react'
 import { useLocalStorageState } from 'ahooks'
 import { hexFromArgb } from '@material/material-color-utilities'
+import { useOutlet } from 'react-router-dom'
 import styles from './style.module.less'
 import PageTitleCard from '@/components/PageTitleCard'
 import { ThemeContext } from '@/stores/theme'
 import UploadImage from '@/components/UploadImage'
-import ThemePalette from '@/components/ThemePalette'
-import { PALETTE, SURFACE, THEME } from '@/constants/scheme'
 import { colorFromImageUrl } from '@/utils/image_utils'
 import { Dialog } from '@/components/Dialog'
-import TonalPalette from '@/components/TonalPalette'
+import RouteTabs from '@/components/RouteTabs'
+import routes, { IRoutes } from '@/routes/routes'
 
-const Index = () => {
+const Dynamic = () => {
   const description = '通过获取图片主色调自动生成主题方案'
   const [image, setImage] = useLocalStorageState('image', {
     defaultValue: {
@@ -19,7 +19,8 @@ const Index = () => {
     }
   })
   const { setThemeColor } = useContext(ThemeContext)
-
+  const routeTabs = useMemo(() => routes?.find((r) => r.path === '/dynamic')?.children, [])
+  const children = useOutlet()
   const fileChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
       const file = e.target.files[0]
@@ -58,30 +59,11 @@ const Index = () => {
         </div>
       </div>
       <section className={styles.themePalette}>
-        <h2>Theme</h2>
-        <div className={styles.themePaletteRow}>
-          {THEME.map((item, index) => {
-            // eslint-disable-next-line react/no-array-index-key
-            return <ThemePalette key={index} data={item} />
-          })}
-        </div>
-        <h2>Surface</h2>
-        <div className={styles.themePaletteRow}>
-          {SURFACE.map((item, index) => {
-            // eslint-disable-next-line react/no-array-index-key
-            return <ThemePalette key={index} data={item} />
-          })}
-        </div>
-        <h2>Palette</h2>
-        <div className={styles.tonalPalette}>
-          {PALETTE.map((item, index) => {
-            // eslint-disable-next-line react/no-array-index-key
-            return <TonalPalette key={index} data={item} />
-          })}
-        </div>
+        <RouteTabs routes={routeTabs as IRoutes[]} />
+        {children}
       </section>
     </div>
   )
 }
 
-export default Index
+export default Dynamic

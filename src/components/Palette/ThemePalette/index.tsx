@@ -11,7 +11,7 @@ interface IThemePaletteProps {
 const ThemePalette = (props: IThemePaletteProps) => {
   const { data } = props
   const colorDetail = (color: IThemeConstants) => {
-    const hexa = getCssGlobalVar(color.hex)
+    const hex = getCssGlobalVar(color.hex)
     const rgb = getCssGlobalVar(color.rgb).trim()
     Dialog.show({
       title: color.token,
@@ -22,8 +22,8 @@ const ThemePalette = (props: IThemePaletteProps) => {
             <Clipboard text={`rgb(${rgb})`} copyId="rgb-copy-id" />
           </div>
           <div className={styles.colorValue}>
-            HEXA: {hexa}
-            <Clipboard text={hexa} copyId="hexa-copy-id" />
+            HEX: {hex}
+            <Clipboard text={hex} copyId="hexa-copy-id" />
           </div>
         </div>
       )

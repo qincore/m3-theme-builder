@@ -4,10 +4,10 @@ import {
   Theme,
   redFromArgb,
   greenFromArgb,
-  blueFromArgb
+  blueFromArgb,
+  hexFromArgb
 } from '@material/material-color-utilities'
 import { ISurfaceProps, Surface } from '@/utils/surface_scheme'
-import { hexFromArgb } from '@/utils/color_utils'
 
 interface ISchemeProps {
   primary: number
@@ -101,6 +101,7 @@ const applySchemes = (theme: Theme) => {
   const light = `:root, .light-theme {\n color-scheme: light;\n${addToken(theme.schemes.light.toJSON(), 'sys')}}\n`
   const dark = `.dark-theme {\n color-scheme: dark;\n${addToken(theme.schemes.dark.toJSON(), 'sys')}}`
   setStyle('theme', `${light}${dark}`)
+  return `${light}${dark}`
 }
 
 /**
@@ -110,6 +111,8 @@ const applySchemes = (theme: Theme) => {
  */
 export const applyTheme = (source: string, options?: { surface?: boolean; paletteTones?: number[] }) => {
   const theme = themeFromSourceColor(argbFromHex(source))
+  let surfaceRes = ''
+  let palettesRes = ''
 
   // palettes 色板应用
   if (options?.paletteTones) {
@@ -124,6 +127,7 @@ export const applyTheme = (source: string, options?: { surface?: boolean; palett
         token += `--md-ref-palette-${paletteKey}-${tone}: ${color};\n`
       }
     }
+    palettesRes = `:root{\n${token}}`
     setStyle('palettes', `:root{\n${token}}`)
   }
 
@@ -131,9 +135,13 @@ export const applyTheme = (source: string, options?: { surface?: boolean; palett
   if (options?.surface) {
     const surfaceLight = addToken(Surface.light(argbFromHex(source)).toJSON(), 'sys')
     const surfaceDark = addToken(Surface.dark(argbFromHex(source)).toJSON(), 'sys')
-    setStyle('surface', `:root, .light-theme {\n${surfaceLight}}\n.dark-theme {\n${surfaceDark}}`)
+    const surfaceCss = `:root, .light-theme {\n${surfaceLight}}\n.dark-theme {\n${surfaceDark}}`
+    surfaceRes = surfaceCss
+    setStyle('surface', surfaceCss)
   }
 
   // theme 主题插入
-  applySchemes(theme)
+  const themeRes = applySchemes(theme)
+
+  return `${themeRes}\n${surfaceRes}\n${palettesRes}`
 }

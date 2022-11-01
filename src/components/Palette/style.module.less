@@ -1,0 +1,21 @@
+.palette {
+  h2 {
+    color: var(--md-sys-color-on-background);
+    margin-top: 36px;
+  }
+  .themePaletteRow {
+  }
+  .tonalPalette {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .palette {
+    .tonalPalette {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+  }
+}

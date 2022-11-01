@@ -1,3 +1,4 @@
+import { useOutlet } from 'react-router-dom'
 import styles from './style.module.less'
 import PageTitleCard from '@/components/PageTitleCard'
 
@@ -6,6 +7,7 @@ const Custom = () => {
   return (
     <div className={styles['app-custom']}>
       <PageTitleCard pageTitle="自定义" pageDescription={description} />
+      <section className={styles.themePalette}>{useOutlet()}</section>
     </div>
   )
 }

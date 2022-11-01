@@ -7,10 +7,12 @@ interface IThemeLocalStorage {
   color: {
     primary: string
   }
+  css: string
 }
 
 interface IThemeContext {
   isDark: boolean
+  css: string
   toggle: () => void
   setThemeColor: (color: { primary: string }) => void
 }
@@ -27,7 +29,8 @@ export const ThemeContextProvider = ({ children }: IThemeContextProviderProps) =
       dark: false,
       color: {
         primary: '#1677ff'
-      }
+      },
+      css: ''
     }
   })
 
@@ -49,7 +52,8 @@ export const ThemeContextProvider = ({ children }: IThemeContextProviderProps) =
 
   const updateTheme = () => {
     const Tones = [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 95, 99, 100]
-    applyTheme(theme.color.primary, { surface: true, paletteTones: Tones })
+    const themeCss = applyTheme(theme.color.primary, { surface: true, paletteTones: Tones })
+    setTheme({ ...theme, css: themeCss })
   }
 
   useLayoutEffect(() => {
@@ -69,6 +73,7 @@ export const ThemeContextProvider = ({ children }: IThemeContextProviderProps) =
       value={{
         isDark,
         toggle,
+        css: theme.css,
         setThemeColor: (color) => {
           setTheme({ ...theme, color })
         }
