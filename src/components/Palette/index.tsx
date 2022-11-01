@@ -1,4 +1,4 @@
-import styles from '@/pages/Dynamic/style.module.less'
+import styles from './style.module.less'
 import { PALETTE, SURFACE, THEME } from '@/constants/scheme'
 import ThemePalette from '@/components/Palette/ThemePalette'
 import TonalPalette from '@/components/Palette/TonalPalette'
