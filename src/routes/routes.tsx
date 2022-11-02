@@ -1,9 +1,8 @@
-import { RouteObject } from 'react-router-dom'
+import { Navigate, RouteObject } from 'react-router-dom'
 import Dynamic from '@/pages/Dynamic'
 import Palette from '@/components/Palette'
 import Custom from '@/pages/Custom'
 import Code from '@/components/Code'
-import Layout from '@/layout'
 
 export interface IRoutes {
   name?: string
@@ -16,35 +15,33 @@ export interface IRoutes {
 const routes: RouteObject[] = [
   {
     path: '/',
-    element: <Layout />,
+    element: <Navigate to="/dynamic" />
+  },
+  {
+    path: '/dynamic',
+    element: <Dynamic />,
     children: [
       {
-        path: '/dynamic',
-        element: <Dynamic />,
-        children: [
-          {
-            path: '/dynamic',
-            element: <Palette />
-          },
-          {
-            path: '/dynamic/code',
-            element: <Code />
-          }
-        ]
+        index: true,
+        element: <Palette />
       },
       {
-        path: '/custom',
-        element: <Custom />,
-        children: [
-          {
-            path: '/custom',
-            element: <Palette />
-          },
-          {
-            path: '/custom/code',
-            element: <Code />
-          }
-        ]
+        path: '/dynamic/code',
+        element: <Code />
+      }
+    ]
+  },
+  {
+    path: '/custom',
+    element: <Custom />,
+    children: [
+      {
+        index: true,
+        element: <Palette />
+      },
+      {
+        path: '/custom/code',
+        element: <Code />
       }
     ]
   }

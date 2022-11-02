@@ -1,75 +1,113 @@
 .secNavbar {
-  height: 80px;
-  display: flex;
-  background-color: var(--md-sys-color-surface1);
-  border-radius: 50px;
-  overflow: hidden;
-  margin-top: 12px;
-  transition: height 0.3s cubic-bezier(0.2, 0, 0, 1);
-  .menuItem {
-    flex: 1;
-    font-size: 16px;
+  position: sticky;
+  top: -1px;
+  max-width: 1760px;
+  margin: 0 auto;
+  border-radius: 0 0 50px 50px;
+  transition-duration: 300ms;
+  transition-property: max-width, margin;
+  transition-timing-function: cubic-bezier(0.2, 0, 0, 1);
+  padding-top: 13px;
+  z-index: 9;
+  &:before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    content: '';
+    width: 100%;
+    height: 50%;
+    background-color: var(--md-sys-color-background);
+    z-index: -1;
+  }
+  .menuGroup {
+    height: 80px;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    color: var(--md-sys-color-on-surface);
-    text-decoration: none;
+    background-color: var(--md-sys-color-surface1);
     border-radius: 50px;
-    position: relative;
-    z-index: 1;
-    &:before {
-      position: absolute;
-      top: 0;
-      left: 0;
-      content: '';
-      width: 100%;
-      height: 100%;
+    overflow: hidden;
+    transition: height 0.3s cubic-bezier(0.2, 0, 0, 1);
+    .menuItem {
+      flex: 1;
+      font-size: 16px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: var(--md-sys-color-on-surface);
+      text-decoration: none;
       border-radius: 50px;
-      background-color: var(--md-sys-color-secondary-container);
-      z-index: -1;
-      opacity: 0;
-      transform: scaleX(0);
-      transition-duration: 200ms;
-      transition-property: transform, opacity;
-      transition-timing-function: linear;
-    }
-    &:after {
-      position: absolute;
-      top: 0;
-      left: 0;
-      content: '';
-      width: 100%;
-      height: 100%;
-      border-radius: 50px;
+      position: relative;
       z-index: 1;
-      opacity: 0;
-      transition: opacity 0.3s linear;
-    }
-    &:hover {
+      &:before {
+        position: absolute;
+        top: 0;
+        left: 0;
+        content: '';
+        width: 100%;
+        height: 100%;
+        border-radius: 50px;
+        background-color: var(--md-sys-color-secondary-container);
+        z-index: -1;
+        opacity: 0;
+        transform: scaleX(0);
+        transition-duration: 200ms;
+        transition-property: transform, opacity;
+        transition-timing-function: linear;
+      }
       &:after {
-        opacity: 1;
-        background-image: linear-gradient(0deg, rgba(68, 71, 70, 0.12), rgba(68, 71, 70, 0.12));
+        position: absolute;
+        top: 0;
+        left: 0;
+        content: '';
+        width: 100%;
+        height: 100%;
+        border-radius: 50px;
+        z-index: 1;
+        opacity: 0;
+        transition: opacity 0.3s linear;
+      }
+      &:hover {
+        &:after {
+          opacity: 1;
+          background-image: linear-gradient(0deg, rgba(68, 71, 70, 0.12), rgba(68, 71, 70, 0.12));
+        }
+      }
+      .menuItemName {
+        margin-left: 8px;
       }
     }
-    .menuItemName {
-      margin-left: 8px;
+    .menuItemActive {
+      font-weight: 500;
+      &:before {
+        opacity: 1;
+        transform: scaleX(1);
+      }
     }
   }
-  .menuItemActive {
-    font-weight: 500;
-    &:before {
-      opacity: 1;
-      transform: scaleX(1);
-    }
+}
+
+.sticky {
+  max-width: 1200px;
+  padding-bottom: 16px;
+  .menuGroup {
+    height: 64px;
+    box-shadow: 0 1px 4px rgba(var(--md-sys-color-scrim-rgb), 0.5);
   }
 }
 
 @media screen and (max-width: 768px) {
   .secNavbar {
-    .menuItem {
-      &:hover {
-        &:after {
-          display: none;
+    margin-top: -64px;
+    padding-top: 76px;
+    &:before {
+      top: 64px;
+      height: 30%;
+    }
+    .menuGroup {
+      .menuItem {
+        &:hover {
+          &:after {
+            display: none;
+          }
         }
       }
     }
@@ -78,12 +116,19 @@
 
 @media screen and (max-width: 550px) {
   .secNavbar {
-    height: 40px;
-    .menuItem {
-      font-size: 14px;
-      span {
-        font-size: 18px;
+    .menuGroup {
+      height: 60px;
+      .menuItem {
+        font-size: 14px;
+        span {
+          font-size: 18px;
+        }
       }
+    }
+  }
+  .sticky {
+    .menuGroup {
+      height: 50px;
     }
   }
 }

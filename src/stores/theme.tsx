@@ -38,8 +38,10 @@ export const ThemeContextProvider = ({ children }: IThemeContextProviderProps) =
 
   const toggleClass = (dark: boolean) => {
     if (dark) {
+      document.documentElement.style.colorScheme = 'dark'
       document.body.classList.add('dark-theme')
     } else {
+      document.documentElement.style.colorScheme = 'light'
       document.body.classList.remove('dark-theme')
     }
     setTheme({ ...theme, dark })

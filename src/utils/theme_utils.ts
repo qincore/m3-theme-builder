@@ -87,7 +87,7 @@ const addToken = (scheme: ISchemeProps | ISurfaceProps, type: string): string =>
     const r = redFromArgb(value)
     const g = greenFromArgb(value)
     const b = blueFromArgb(value)
-    css += `--md-${type}-color-${token}-rgb: ${r},${g},${b};\n--md-${type}-color-${token}: ${colorHex};\n`
+    css += `  --md-${type}-color-${token}-rgb: ${r},${g},${b};\n  --md-${type}-color-${token}: ${colorHex};\n`
   }
 
   return css
@@ -98,8 +98,8 @@ const addToken = (scheme: ISchemeProps | ISurfaceProps, type: string): string =>
  * @param theme 主题方案
  */
 const applySchemes = (theme: Theme) => {
-  const light = `:root, .light-theme {\n color-scheme: light;\n${addToken(theme.schemes.light.toJSON(), 'sys')}}\n`
-  const dark = `.dark-theme {\n color-scheme: dark;\n${addToken(theme.schemes.dark.toJSON(), 'sys')}}`
+  const light = `:root, .light-theme {\n${addToken(theme.schemes.light.toJSON(), 'sys')}}\n`
+  const dark = `.dark-theme {\n${addToken(theme.schemes.dark.toJSON(), 'sys')}}`
   setStyle('theme', `${light}${dark}`)
   return `${light}${dark}`
 }
@@ -124,7 +124,7 @@ export const applyTheme = (source: string, options?: { surface?: boolean; palett
       // eslint-disable-next-line no-restricted-syntax
       for (const tone of tones) {
         const color = hexFromArgb(palette.tone(tone))
-        token += `--md-ref-palette-${paletteKey}-${tone}: ${color};\n`
+        token += `  --md-ref-palette-${paletteKey}-${tone}: ${color};\n`
       }
     }
     palettesRes = `:root{\n${token}}`

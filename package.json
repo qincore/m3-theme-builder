@@ -32,13 +32,13 @@
     "prism-react-renderer": "^1.3.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-router-dom": "^6.4.2"
+    "react-router-dom": "^6.4.3"
   },
   "devDependencies": {
     "@babel/core": "^7.19.6",
     "@commitlint/cli": "^17.2.0",
     "@commitlint/config-conventional": "^17.2.0",
-    "@types/node": "^18.11.8",
+    "@types/node": "^18.11.9",
     "@types/react": "^18.0.24",
     "@types/react-dom": "^18.0.8",
     "@typescript-eslint/eslint-plugin": "^5.42.0",
@@ -69,6 +69,6 @@
     "typescript": "^4.8.4",
     "vite": "^3.2.2",
     "vite-plugin-svgr": "^2.2.2",
-    "vitest": "^0.24.4"
+    "vitest": "^0.24.5"
   }
 }

@@ -57,7 +57,7 @@ const Dialog = (props: IDialogProps) => {
     setTimeout(() => {
       setVisible(false)
       onClose?.()
-    }, 500)
+    }, 300)
   }
 
   const ok = (e: React.MouseEvent<HTMLButtonElement>) => {

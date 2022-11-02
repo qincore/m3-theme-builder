@@ -1,15 +1,17 @@
 import ClipboardJS from 'clipboard'
 import { useEffect, useState } from 'react'
+import classnames from 'classnames'
 import Button from '@/components/Button'
 import styles from './style.module.less'
 
 interface IClipboardProps {
   text: string
   copyId: string
+  className?: string
 }
 
 const Clipboard = (props: IClipboardProps) => {
-  const { text, copyId } = props
+  const { text, copyId, className } = props
   const [isSuccess, setIsSuccess] = useState(false)
 
   useEffect(() => {
@@ -21,7 +23,7 @@ const Clipboard = (props: IClipboardProps) => {
     return () => {
       clipboard.destroy()
     }
-  }, [])
+  }, [copyId])
 
   useEffect(() => {
     let timeout: number | undefined
@@ -36,7 +38,7 @@ const Clipboard = (props: IClipboardProps) => {
   }, [isSuccess])
 
   return (
-    <div id={copyId} data-clipboard-text={text} className={styles.copyContainer}>
+    <div id={copyId} data-clipboard-text={text} className={classnames(styles.copyContainer, className)}>
       <Button
         className={styles.copyBtn}
         type="text"
