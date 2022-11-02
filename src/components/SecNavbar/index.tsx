@@ -14,12 +14,12 @@ const SecNavbar = (props: IRouteTabsProps) => {
   const [isSticky, setIsSticky] = useState<boolean>(false)
   const secNavbarRef = useRef<HTMLDivElement>(null)
 
-  // const barToTop = (path: string) => {
-  // if (secNavbarRef?.current && path !== pathname) {
-  //   const top = secNavbarRef?.current.offsetTop
-  //   window.scrollTo(0, top + 1)
-  // }
-  // }
+  const barToTop = (path: string) => {
+    if (secNavbarRef?.current && path !== pathname) {
+      const top = secNavbarRef?.current.offsetTop
+      window.scrollTo(0, top + 1)
+    }
+  }
 
   useEffect(() => {
     const cachedRef = secNavbarRef.current
@@ -52,7 +52,7 @@ const SecNavbar = (props: IRouteTabsProps) => {
               key={menu.path}
               className={classnames(styles.menuItem, { [styles.menuItemActive]: isActive })}
               to={menu.path}
-              // onClick={() => barToTop(menu.path)}
+              onClick={() => barToTop(menu.path)}
             >
               <span className={classnames(`material-icons${isActive ? '' : '-outlined'}`, styles.menuItemIcon)}>
                 {menu.icon}

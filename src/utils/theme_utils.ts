@@ -41,6 +41,11 @@ interface ISchemeProps {
   inversePrimary: number
 }
 
+export interface IThemeCss {
+  type: string
+  css: string
+}
+
 /**
  * @description 删除所有子节点
  * @param parent 需要删除子节点的 html 元素
@@ -109,7 +114,7 @@ const applySchemes = (theme: Theme) => {
  * @param source 来源颜色 hex
  * @param options 主题可选配置 surface（生成高程面色值）、paletteTones（生成色板色调组）
  */
-export const applyTheme = (source: string, options?: { surface?: boolean; paletteTones?: number[] }) => {
+export const applyTheme = (source: string, options?: { surface?: boolean; paletteTones?: number[] }): IThemeCss[] => {
   const theme = themeFromSourceColor(argbFromHex(source))
   let surfaceRes = ''
   let palettesRes = ''
@@ -143,5 +148,18 @@ export const applyTheme = (source: string, options?: { surface?: boolean; palett
   // theme 主题插入
   const themeRes = applySchemes(theme)
 
-  return `${themeRes}\n${surfaceRes}\n${palettesRes}`
+  return [
+    {
+      type: 'Theme',
+      css: themeRes
+    },
+    {
+      type: 'Surface',
+      css: surfaceRes
+    },
+    {
+      type: 'Palettes',
+      css: palettesRes
+    }
+  ]
 }

@@ -19,11 +19,11 @@ const ThemePalette = (props: IThemePaletteProps) => {
         <div className={styles.colorDetail}>
           <div className={styles.colorValue}>
             RGB: {`rgb(${rgb})`}
-            <Clipboard text={`rgb(${rgb})`} copyId="rgb-copy-id" />
+            <Clipboard text={`rgb(${rgb})`} />
           </div>
           <div className={styles.colorValue}>
             HEX: {hex}
-            <Clipboard text={hex} copyId="hexa-copy-id" />
+            <Clipboard text={hex} />
           </div>
         </div>
       )

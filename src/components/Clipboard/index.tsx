@@ -1,29 +1,34 @@
 import ClipboardJS from 'clipboard'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import classnames from 'classnames'
 import Button from '@/components/Button'
 import styles from './style.module.less'
 
 interface IClipboardProps {
   text: string
-  copyId: string
   className?: string
+  tipsPosition?: string
 }
 
 const Clipboard = (props: IClipboardProps) => {
-  const { text, copyId, className } = props
+  const { text, className, tipsPosition = 'down' } = props
   const [isSuccess, setIsSuccess] = useState(false)
+  const copyRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    const clipboard = new ClipboardJS(`#${copyId}`)
-    clipboard.on('success', (e) => {
-      setIsSuccess(true)
-      e.clearSelection()
-    })
+    let clipboard: ClipboardJS
+    if (copyRef.current) {
+      clipboard = new ClipboardJS(copyRef.current)
+      clipboard.on('success', (e) => {
+        setIsSuccess(true)
+        e.clearSelection()
+      })
+    }
+
     return () => {
       clipboard.destroy()
     }
-  }, [copyId])
+  }, [copyRef])
 
   useEffect(() => {
     let timeout: number | undefined
@@ -38,13 +43,13 @@ const Clipboard = (props: IClipboardProps) => {
   }, [isSuccess])
 
   return (
-    <div id={copyId} data-clipboard-text={text} className={classnames(styles.copyContainer, className)}>
+    <div ref={copyRef} data-clipboard-text={text} className={classnames(styles.copyContainer, className)}>
       <Button
         className={styles.copyBtn}
         type="text"
         icon={<span className="material-icons-outlined">{isSuccess ? 'done' : 'content_copy'}</span>}
       />
-      {isSuccess && '复制成功'}
+      <div className={classnames(styles.tips, styles[tipsPosition])} />
     </div>
   )
 }
