@@ -8,7 +8,7 @@ export const MENU: IMenuConstants[] = [
     children: [
       {
         name: '色板',
-        path: '/dynamic',
+        path: '/dynamic/palette',
         icon: 'palette'
       },
       {
@@ -25,7 +25,7 @@ export const MENU: IMenuConstants[] = [
     children: [
       {
         name: '色板',
-        path: '/custom',
+        path: '/custom/palette',
         icon: 'palette'
       },
       {

@@ -15,14 +15,20 @@ export interface IRoutes {
 const routes: RouteObject[] = [
   {
     path: '/',
-    element: <Navigate to="/dynamic" />
+    element: <Navigate to="/dynamic/palette" />
+  },
+
+  // 动态颜色页路由
+  {
+    path: '/dynamic',
+    element: <Navigate to="/dynamic/palette" />
   },
   {
     path: '/dynamic',
     element: <Dynamic />,
     children: [
       {
-        index: true,
+        path: '/dynamic/palette',
         element: <Palette />
       },
       {
@@ -31,13 +37,18 @@ const routes: RouteObject[] = [
       }
     ]
   },
+
+  // 自定义页路由
+  {
+    path: '/custom',
+    element: <Navigate to="/custom/palette" />
+  },
   {
     path: '/custom',
     element: <Custom />,
     children: [
       {
-        index: true,
-        path: '/custom',
+        path: '/custom/palette',
         element: <Palette />
       },
       {
