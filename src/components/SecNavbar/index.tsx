@@ -16,8 +16,10 @@ const SecNavbar = (props: IRouteTabsProps) => {
 
   const barToTop = (path: string) => {
     if (secNavbarRef?.current && path !== pathname) {
-      const top = secNavbarRef?.current.offsetTop
-      window.scrollTo({ top: top + 2, behavior: 'smooth' })
+      const top = secNavbarRef?.current.getBoundingClientRect().top
+      if (top > 0) {
+        window.scrollTo({ top: top + window.scrollY + 2 })
+      }
     }
   }
 

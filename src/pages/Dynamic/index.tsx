@@ -1,7 +1,8 @@
 import { ChangeEvent, useContext, useEffect, useMemo } from 'react'
 import { useLocalStorageState } from 'ahooks'
 import { hexFromArgb } from '@material/material-color-utilities'
-import { useLocation, useOutlet } from 'react-router-dom'
+import { Outlet, useLocation } from 'react-router-dom'
+import { AnimatePresence, motion } from 'framer-motion'
 import styles from './style.module.less'
 import PageTitleCard from '@/components/PageTitleCard'
 import { ThemeContext } from '@/stores/theme'
@@ -20,7 +21,6 @@ const Dynamic = () => {
     }
   })
   const { setThemeColor } = useContext(ThemeContext)
-  const children = useOutlet()
   const { pathname } = useLocation()
 
   const secMenus = useMemo(() => {
@@ -48,6 +48,7 @@ const Dynamic = () => {
   }
 
   useEffect(() => {
+    window.scrollTo(0, 0)
     ;(async () => {
       const source = await colorFromImageUrl(image.url, 5)
       setThemeColor({ primary: hexFromArgb(source) })
@@ -55,7 +56,12 @@ const Dynamic = () => {
   }, [image])
 
   return (
-    <div className={styles.index}>
+    <motion.div
+      className={styles.index}
+      initial={{ opacity: 0, y: '2%' }}
+      animate={{ opacity: 1, y: '0' }}
+      transition={{ ease: [0.2, 0, 0, 1] }}
+    >
       <div className={styles.indexHeader}>
         <div className={styles.titleBlock}>
           <PageTitleCard pageTitle="动态颜色" pageDescription={description} />
@@ -65,8 +71,12 @@ const Dynamic = () => {
         </div>
       </div>
       <SecNavbar menus={secMenus as IMenuConstants[]} pathname={pathname} />
-      <section className={styles.themePalette}>{children}</section>
-    </div>
+      <section className={styles.themePalette}>
+        <AnimatePresence initial={false}>
+          <Outlet />
+        </AnimatePresence>
+      </section>
+    </motion.div>
   )
 }
 

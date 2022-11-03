@@ -1,4 +1,5 @@
 import { useLocation } from 'react-router-dom'
+import { AnimatePresence } from 'framer-motion'
 import styles from './style.module.less'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
@@ -11,7 +12,9 @@ const Layout = () => {
     <>
       <Navbar pathname={pathname} menu={MENU} />
       <main className={styles['app-main']}>
-        <Router />
+        <AnimatePresence initial={false}>
+          <Router />
+        </AnimatePresence>
         <Footer />
       </main>
     </>
