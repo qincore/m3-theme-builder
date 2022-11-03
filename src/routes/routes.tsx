@@ -37,6 +37,7 @@ const routes: RouteObject[] = [
     children: [
       {
         index: true,
+        path: '/custom',
         element: <Palette />
       },
       {
