@@ -76,7 +76,7 @@ const Navbar = (props: INavbar) => {
           {menu
             .filter((r) => r.path !== '/')
             .map((item) => {
-              const isActive = pathname.includes(item.path)
+              const isActive = item.children?.some((child) => child.path === pathname)
               return (
                 <Link
                   key={item.path}

@@ -3,7 +3,7 @@ import { IMenuConstants } from '@/types/constants'
 export const MENU: IMenuConstants[] = [
   {
     name: '动态颜色',
-    path: '/dynamic',
+    path: '/dynamic/palette',
     icon: 'auto_awesome',
     children: [
       {
@@ -20,7 +20,7 @@ export const MENU: IMenuConstants[] = [
   },
   {
     name: '自定义',
-    path: '/custom',
+    path: '/custom/palette',
     icon: 'tune',
     children: [
       {

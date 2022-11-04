@@ -24,7 +24,7 @@ const Dynamic = () => {
   const { pathname } = useLocation()
 
   const secMenus = useMemo(() => {
-    return MENU.find((r) => r.path === '/dynamic')?.children
+    return MENU.find((r) => r.path.includes('/dynamic'))?.children
   }, [])
 
   const fileChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -58,7 +58,7 @@ const Dynamic = () => {
   return (
     <motion.div
       className={styles.index}
-      initial={{ opacity: 0, y: '2%' }}
+      initial={{ opacity: 0, y: '20px' }}
       animate={{ opacity: 1, y: '0' }}
       transition={{ ease: [0.2, 0, 0, 1] }}
     >
