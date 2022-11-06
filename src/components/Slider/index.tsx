@@ -1,4 +1,5 @@
 import { useEffect, useState, ChangeEvent } from 'react'
+import classnames from 'classnames'
 import styles from './style.module.less'
 
 interface ISliderProps {
@@ -7,11 +8,12 @@ interface ISliderProps {
   min?: string
   max?: string
   defaultValue?: string
+  className?: string
   onChange?: (value: string) => void
 }
 
 const Slider = (props: ISliderProps) => {
-  const { label, bg, min, max, defaultValue, onChange } = props
+  const { label, bg, min, max, defaultValue, className, onChange } = props
   const [value, setValue] = useState<string>(defaultValue ?? '0')
 
   const inputChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -31,7 +33,7 @@ const Slider = (props: ISliderProps) => {
   }, [value])
 
   return (
-    <div className={styles.slider}>
+    <div className={classnames(styles.slider, className)}>
       <div className={styles.sliderHeader}>
         <div className={styles.sliderLabel}>{label}</div>
         <div className={styles.sliderValue}>

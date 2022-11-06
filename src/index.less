@@ -21,6 +21,20 @@
   text-size-adjust: 100%;
 }
 
+input {
+  color: var(--md-sys-color-on-tertiary-container);
+  background-color: var(--md-sys-color-tertiary-container);
+  border: 2px solid transparent;
+  border-radius: 6px;
+  outline: none;
+  padding: 2px 4px;
+  transition: border 0.2s;
+  width: 100%;
+  &:focus {
+    border: 2px solid var(--md-sys-color-primary);
+  }
+}
+
 body {
   margin: 0;
 }

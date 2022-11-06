@@ -2,17 +2,23 @@ import { useLayoutEffect, createContext, useMemo, useEffect } from 'react'
 import { useLocalStorageState } from 'ahooks'
 import { applyTheme, IThemeCss } from '@/utils/theme_utils'
 
+export interface IDColor {
+  primary: string
+  secondary?: string
+  tertiary?: string
+  neutral?: string
+}
+
 interface IThemeLocalStorage {
   dark: boolean
-  color: {
-    primary: string
-  }
+  color: IDColor
   css: IThemeCss[]
 }
 
 interface IThemeContext {
   isDark: boolean
   css: IThemeCss[]
+  color: IDColor
   toggle: () => void
   setThemeColor: (color: { primary: string }) => void
 }
@@ -77,6 +83,7 @@ export const ThemeContextProvider = ({ children }: IThemeContextProviderProps) =
       value={{
         isDark,
         toggle,
+        color: theme.color,
         css: theme.css,
         setThemeColor: (color) => {
           setTheme({ ...theme, color })
