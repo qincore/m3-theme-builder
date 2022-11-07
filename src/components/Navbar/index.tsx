@@ -38,9 +38,29 @@ const Navbar = (props: INavbar) => {
         <>
           <div>Material 主题生成器</div>
           <br />
-          <div>生成web使用的Material 3主题，包含surface高程颜色</div>
+          <div style={{ fontSize: '14px', whiteSpace: 'pre-line' }}>
+            {`• 生成WEB使用的Material 3主题方案
+            • 在官方工具基础上增加Surface高度叠加色
+            • 代码输出包含RGB和HEX以使用更多场景`}
+            <div>
+              • 其他平台可前往
+              <a
+                style={{ color: 'var(--md-sys-color-primary)', textDecoration: 'none' }}
+                href="https://m3.material.io/theme-builder"
+                target="_blank"
+                rel="noreferrer"
+              >
+                官方生成器
+              </a>
+              获取
+            </div>
+          </div>
           <br />
-          <div style={{ fontSize: '14px', opacity: 0.9 }}>@走心叁次方ZEIR</div>
+          <div style={{ fontSize: '12px', opacity: 0.7, whiteSpace: 'pre-line', lineHeight: '18px' }}>
+            {`作者：@走心叁次方ZEIR
+              依赖核心：@material/material-color-utilities
+              设计参考：m3.material.io`}
+          </div>
           <div
             style={{
               display: 'flex',
