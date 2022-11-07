@@ -1,0 +1,22 @@
+.rgbInput {
+  width: 100%;
+  padding: 0 4px;
+  background-color: var(--md-sys-color-tertiary-container);
+  border-radius: 6px;
+  overflow: hidden;
+  border: 2px solid transparent;
+  transition: border 0.2s;
+  input {
+    text-align: center;
+    width: (1 / 3) * 100%;
+    border: none;
+    background-color: transparent;
+    &:focus {
+      border: none;
+    }
+  }
+}
+
+.focus {
+  border: 2px solid var(--md-sys-color-primary);
+}

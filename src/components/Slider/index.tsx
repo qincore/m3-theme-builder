@@ -1,4 +1,4 @@
-import { useEffect, useState, ChangeEvent } from 'react'
+import { ChangeEvent, memo } from 'react'
 import classnames from 'classnames'
 import styles from './style.module.less'
 
@@ -7,42 +7,45 @@ interface ISliderProps {
   bg?: string
   min?: string
   max?: string
-  defaultValue?: string
+  value?: string
   className?: string
   onChange?: (value: string) => void
 }
 
 const Slider = (props: ISliderProps) => {
-  const { label, bg, min, max, defaultValue, className, onChange } = props
-  const [value, setValue] = useState<string>(defaultValue ?? '0')
+  const { label, bg, min, max, value, className, onChange } = props
+  // const [value, setValue] = useState<string>('0')
 
   const inputChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.value === '') {
-      setValue('0')
+      onChange?.('0')
       return
     }
-    setValue(e.target.value.replace(/^[0]+/, ''))
+    onChange?.(e.target.value.replace(/^[0]+/, ''))
   }
 
   const rangeChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setValue(e.target.value)
+    onChange?.(e.target.value)
   }
-
-  useEffect(() => {
-    onChange?.(value)
-  }, [value])
 
   return (
     <div className={classnames(styles.slider, className)}>
       <div className={styles.sliderHeader}>
         <div className={styles.sliderLabel}>{label}</div>
         <div className={styles.sliderValue}>
-          <input min={min} max={max} className={styles.sliderValueInput} value={value} onChange={inputChange} />
+          <input
+            min={min}
+            max={max}
+            type="text"
+            className={styles.sliderValueInput}
+            value={value}
+            onChange={inputChange}
+          />
         </div>
       </div>
       <input
         value={value}
-        style={{ background: bg ?? 'red' }}
+        style={{ backgroundImage: bg ?? 'red', boxShadow: 'inset 0 0 2px 1px rgba(0,0,0,.2)' }}
         type="range"
         name="hue"
         min={min}
@@ -52,4 +55,4 @@ const Slider = (props: ISliderProps) => {
     </div>
   )
 }
-export default Slider
+export default memo(Slider)

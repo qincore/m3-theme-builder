@@ -9,9 +9,9 @@ interface IColorPickerProps {
 }
 
 export interface IHctValue {
-  hue?: number
-  chroma?: number
-  tone?: number
+  hue: number
+  chroma: number
+  tone: number
 }
 
 const ColorPicker = (props: IColorPickerProps) => {

@@ -20,14 +20,28 @@
   }
 }
 
-@media screen and (max-width: 550px) {
+@media screen and (max-width: 768px) {
   .app-custom {
     min-height: calc(100vh - 78px - 64px);
+    .customHeader {
+      flex-direction: column;
+      .titleBlock {
+        width: 100%;
+      }
+      .colorPanel {
+        width: 100%;
+        height: 148px;
+        margin-left: 0;
+        margin-top: 12px;
+      }
+    }
   }
 }
 
 @media screen and (max-width: 550px) {
   .app-custom {
+    .customHeader {
+    }
     .themePalette {
       .tonalPalette {
         grid-template-columns: repeat(3, 1fr);

@@ -1,4 +1,11 @@
-import { alphaFromArgb, blueFromArgb, greenFromArgb, redFromArgb } from '@material/material-color-utilities'
+import {
+  alphaFromArgb,
+  argbFromHex,
+  blueFromArgb,
+  greenFromArgb,
+  Hct,
+  redFromArgb
+} from '@material/material-color-utilities'
 
 /**
  * @description 将背景色和前景色混合成新的颜色，主要用于计算出surface高程颜色.
@@ -67,4 +74,19 @@ export const argbAddAlpha = (argb: number, alpha: number): number => {
   const sb = blueFromArgb(argb)
   // eslint-disable-next-line no-bitwise
   return ((a << 24) | ((sr & 255) << 16) | ((sg & 255) << 8) | (sb & 255)) >>> 0
+}
+
+export const hexToRgb = (hex: string): number[] => {
+  return hex
+    .replace(/^#?([a-f\d])([a-f\d])([a-f\d])$/i, (_, r, g, b) => `#${r}${r}${g}${g}${b}${b}`)
+    .substring(1)
+    .match(/.{2}/g)
+    ?.map((x) => parseInt(x, 16)) as number[]
+}
+
+export const rgbToHex = (rgb: number[]): string => `#${rgb.map((v) => v.toString(16).padStart(2, '0')).join('')}`
+
+export const hexToHct = (hex: string) => {
+  const hct = Hct.fromInt(argbFromHex(hex))
+  return { hue: Math.round(hct.hue), chroma: Math.round(hct.chroma), tone: Math.round(hct.tone) }
 }

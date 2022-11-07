@@ -19,6 +19,18 @@ const CustomColorPanel = (props: ICustomColorPanelProps) => {
           <ColorPicker value={value.primary} onChange={(c) => valueChange(c, 'primary')} />
           <div className={styles.colorInputLabel}>Primary</div>
         </div>
+        <div className={styles.colorInputItem}>
+          <ColorPicker value={value.primary} onChange={(c) => valueChange(c, 'primary')} />
+          <div className={styles.colorInputLabel}>Secondary</div>
+        </div>
+        <div className={styles.colorInputItem}>
+          <ColorPicker value={value.primary} onChange={(c) => valueChange(c, 'primary')} />
+          <div className={styles.colorInputLabel}>Tertiary</div>
+        </div>
+        <div className={styles.colorInputItem}>
+          <ColorPicker value={value.primary} onChange={(c) => valueChange(c, 'primary')} />
+          <div className={styles.colorInputLabel}>Neutral</div>
+        </div>
       </div>
     </div>
   )

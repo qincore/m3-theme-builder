@@ -7,13 +7,43 @@
   justify-content: center;
   align-items: center;
   .colorInputWrapper {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    padding: 0 3vw;
     .colorInputItem {
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      width: 80px;
       text-align: center;
       .colorInputLabel {
         margin-top: 12px;
         color: var(--md-sys-color-on-surface);
         font-size: 16px;
+        font-weight: 600;
       }
+    }
+  }
+}
+
+@media screen and (max-width: 960px) {
+  .customColorPanel {
+    .colorInputWrapper {
+      .colorInputItem {
+        width: 64px;
+        .colorInputLabel {
+          font-size: 12px;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 960px) {
+  .customColorPanel {
+    .colorInputWrapper {
+      padding: 0 4vw;
     }
   }
 }
