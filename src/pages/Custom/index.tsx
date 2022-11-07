@@ -1,6 +1,6 @@
 import { Outlet, useLocation } from 'react-router-dom'
 import { AnimatePresence, motion } from 'framer-motion'
-import { useContext, useMemo } from 'react'
+import { useContext, useEffect, useMemo } from 'react'
 import styles from './style.module.less'
 import PageTitleCard from '@/components/PageTitleCard'
 import { IMenuConstants } from '@/types/constants'
@@ -20,6 +20,10 @@ const Custom = () => {
 
   const secMenus = useMemo(() => {
     return MENU.find((r) => r.path.includes('/custom'))?.children
+  }, [])
+
+  useEffect(() => {
+    window.scrollTo(0, 0)
   }, [])
   return (
     <motion.div
