@@ -76,7 +76,7 @@ export const ThemeContextProvider = ({ children }: IThemeContextProviderProps) =
 
   useEffect(() => {
     updateTheme()
-  }, [theme.custom.secondary, theme.custom.tertiary, theme.custom.neutral, pathname])
+  }, [theme.custom.secondary, theme.custom.tertiary, theme.custom.neutral])
 
   useEffect(() => {
     updateTheme(true)

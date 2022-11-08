@@ -8,6 +8,7 @@ import Button from '@/components/Button'
 import { Dialog } from '@/components/Dialog'
 import { FOLLOWS } from '@/constants/follows'
 import { IMenuConstants } from '@/types/constants'
+import { ReactComponent as MLogo } from '@/assets/logo.svg'
 
 interface INavbar {
   pathname: string
@@ -89,7 +90,7 @@ const Navbar = (props: INavbar) => {
     <header className={classnames(styles.header, { [styles.showSurface]: showSurface })}>
       <nav className={styles.nav}>
         <div className={styles.logo}>
-          <span className={classnames('material-icons-outlined', styles.logoIcon)}>mood</span>
+          <MLogo className={styles.logoIcon} />
         </div>
         <div className={styles.appName}>Material 主题生成器</div>
         <menu className={styles.menu}>
