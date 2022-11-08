@@ -1,10 +1,10 @@
 import styles from './style.module.less'
 import ColorPicker from '@/components/ColorPicker'
-import { IDColor } from '@/stores/theme'
+import { ISourceColor } from '@/utils/theme_utils'
 
 interface ICustomColorPanelProps {
-  value: IDColor
-  onChange?: (c: IDColor) => void
+  value: ISourceColor
+  onChange?: (c: ISourceColor) => void
 }
 
 const CustomColorPanel = (props: ICustomColorPanelProps) => {
@@ -20,15 +20,15 @@ const CustomColorPanel = (props: ICustomColorPanelProps) => {
           <div className={styles.colorInputLabel}>Primary</div>
         </div>
         <div className={styles.colorInputItem}>
-          <ColorPicker value={value.primary} onChange={(c) => valueChange(c, 'primary')} />
+          <ColorPicker value={value.secondary as string} onChange={(c) => valueChange(c, 'secondary')} />
           <div className={styles.colorInputLabel}>Secondary</div>
         </div>
         <div className={styles.colorInputItem}>
-          <ColorPicker value={value.primary} onChange={(c) => valueChange(c, 'primary')} />
+          <ColorPicker value={value.tertiary as string} onChange={(c) => valueChange(c, 'tertiary')} />
           <div className={styles.colorInputLabel}>Tertiary</div>
         </div>
         <div className={styles.colorInputItem}>
-          <ColorPicker value={value.primary} onChange={(c) => valueChange(c, 'primary')} />
+          <ColorPicker value={value.neutral as string} onChange={(c) => valueChange(c, 'neutral')} />
           <div className={styles.colorInputLabel}>Neutral</div>
         </div>
       </div>

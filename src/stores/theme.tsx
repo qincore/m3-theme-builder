@@ -1,24 +1,21 @@
 import { useLayoutEffect, createContext, useMemo, useEffect } from 'react'
 import { useLocalStorageState } from 'ahooks'
-import { applyTheme, IThemeCss } from '@/utils/theme_utils'
-
-export interface IDColor {
-  primary: string
-  secondary?: string
-  tertiary?: string
-  neutral?: string
-}
+import { useLocation } from 'react-router-dom'
+import { applyTheme, ISourceColor, IThemeCss } from '@/utils/theme_utils'
+// import { ThemeScheme } from '@/utils/theme_scheme'
 
 interface IThemeLocalStorage {
   dark: boolean
-  color: IDColor
+  dynamic: ISourceColor
+  custom: ISourceColor
   css: IThemeCss[]
 }
 
 interface IThemeContext {
   isDark: boolean
   css: IThemeCss[]
-  color: IDColor
+  dynamic: ISourceColor
+  custom: ISourceColor
   toggle: () => void
   setThemeColor: (color: { primary: string }) => void
 }
@@ -33,14 +30,24 @@ export const ThemeContextProvider = ({ children }: IThemeContextProviderProps) =
   const [theme, setTheme] = useLocalStorageState<IThemeLocalStorage>('theme', {
     defaultValue: {
       dark: false,
-      color: {
+      dynamic: {
         primary: '#1677ff'
+      },
+      custom: {
+        primary: '#6750A4',
+        secondary: '#958DA5',
+        tertiary: '#B58392',
+        neutral: '#939094'
       },
       css: []
     }
   })
 
+  const { pathname } = useLocation()
+
   const isDark = useMemo(() => theme.dark, [theme.dark])
+
+  const isCustom = useMemo(() => pathname.includes('/custom'), [pathname])
 
   const toggleClass = (dark: boolean) => {
     if (dark) {
@@ -58,16 +65,22 @@ export const ThemeContextProvider = ({ children }: IThemeContextProviderProps) =
     toggleClass(!dark)
   }
 
-  const updateTheme = () => {
+  const updateTheme = (dynamic?: boolean) => {
     const Tones = [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 95, 99, 100]
-    const themeCss = applyTheme(theme.color.primary, { surface: true, paletteTones: Tones })
+    // eslint-disable-next-line no-nested-ternary
+    const color = isCustom ? (dynamic ? { primary: theme.custom.primary } : theme.custom) : theme.dynamic
+    const themeCss = applyTheme(color, { surface: true, paletteTones: Tones })
 
     setTheme({ ...theme, css: themeCss })
   }
 
   useEffect(() => {
     updateTheme()
-  }, [theme.color])
+  }, [theme.custom.secondary, theme.custom.tertiary, theme.custom.neutral, pathname])
+
+  useEffect(() => {
+    updateTheme(true)
+  }, [theme.dynamic, theme.custom.primary, pathname])
 
   useLayoutEffect(() => {
     updateTheme()
@@ -83,10 +96,15 @@ export const ThemeContextProvider = ({ children }: IThemeContextProviderProps) =
       value={{
         isDark,
         toggle,
-        color: theme.color,
+        dynamic: theme.dynamic,
+        custom: theme.custom,
         css: theme.css,
-        setThemeColor: (color) => {
-          setTheme({ ...theme, color })
+        setThemeColor: (source) => {
+          if (isCustom) {
+            setTheme({ ...theme, custom: { ...theme.custom, ...source } })
+          } else {
+            setTheme({ ...theme, dynamic: source })
+          }
         }
       }}
     >

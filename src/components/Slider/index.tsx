@@ -14,7 +14,6 @@ interface ISliderProps {
 
 const Slider = (props: ISliderProps) => {
   const { label, bg, min, max, value, className, onChange } = props
-  // const [value, setValue] = useState<string>('0')
 
   const inputChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.value === '') {

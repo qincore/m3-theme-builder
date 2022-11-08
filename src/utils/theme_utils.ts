@@ -1,13 +1,14 @@
 import {
   argbFromHex,
-  themeFromSourceColor,
-  Theme,
   redFromArgb,
   greenFromArgb,
   blueFromArgb,
-  hexFromArgb
+  hexFromArgb,
+  CorePalette,
+  TonalPalette
 } from '@material/material-color-utilities'
 import { ISurfaceProps, Surface } from '@/utils/surface_scheme'
+import { ISourceParams, ThemeScheme } from './theme_scheme'
 
 interface ISchemeProps {
   primary: number
@@ -44,6 +45,25 @@ interface ISchemeProps {
 export interface IThemeCss {
   type: string
   css: string
+}
+
+export interface ISourceColor {
+  primary: string
+  secondary?: string
+  tertiary?: string
+  neutral?: string
+}
+
+export interface Theme {
+  schemes: { light: ThemeScheme; dark: ThemeScheme }
+  palettes: {
+    primary: TonalPalette
+    secondary: TonalPalette
+    tertiary: TonalPalette
+    neutral: TonalPalette
+    neutralVariant: TonalPalette
+    error: TonalPalette
+  }
 }
 
 /**
@@ -100,9 +120,31 @@ const addToken = (scheme: ISchemeProps | ISurfaceProps, type: string): string =>
 
 /**
  * @description 主题方案生成 css
+ * @param source
+ */
+const sourceColorToTheme = (source: ISourceParams): Theme => {
+  const palette = CorePalette.of(source.primary)
+  return {
+    schemes: {
+      light: ThemeScheme.sourceToLight(source),
+      dark: ThemeScheme.sourceToDark(source)
+    },
+    palettes: {
+      primary: palette.a1,
+      secondary: palette.a2,
+      tertiary: palette.a3,
+      neutral: palette.n1,
+      neutralVariant: palette.n2,
+      error: palette.error
+    }
+  }
+}
+
+/**
+ * @description 主题方案生成 css
  * @param theme 主题方案
  */
-const applySchemes = (theme: Theme) => {
+const applyThemeSchemes = (theme: Theme) => {
   const light = `:root, .light-theme {\n${addToken(theme.schemes.light.toJSON(), 'sys')}}\n`
   const dark = `.dark-theme {\n${addToken(theme.schemes.dark.toJSON(), 'sys')}}`
   setStyle('theme', `${light}${dark}`)
@@ -114,8 +156,17 @@ const applySchemes = (theme: Theme) => {
  * @param source 来源颜色 hex
  * @param options 主题可选配置 surface（生成高程面色值）、paletteTones（生成色板色调组）
  */
-export const applyTheme = (source: string, options?: { surface?: boolean; paletteTones?: number[] }): IThemeCss[] => {
-  const theme = themeFromSourceColor(argbFromHex(source))
+export const applyTheme = (
+  source: ISourceColor,
+  options?: { surface?: boolean; paletteTones?: number[] }
+): IThemeCss[] => {
+  const theme = sourceColorToTheme({
+    primary: argbFromHex(source.primary),
+    secondary: source.secondary ? argbFromHex(source.secondary) : undefined,
+    tertiary: source.tertiary ? argbFromHex(source.tertiary) : undefined,
+    neutral: source.neutral ? argbFromHex(source.neutral) : undefined
+  })
+
   let surfaceRes = ''
   let palettesRes = ''
 
@@ -138,15 +189,15 @@ export const applyTheme = (source: string, options?: { surface?: boolean; palett
 
   // surface 面色值应用
   if (options?.surface) {
-    const surfaceLight = addToken(Surface.light(argbFromHex(source)).toJSON(), 'sys')
-    const surfaceDark = addToken(Surface.dark(argbFromHex(source)).toJSON(), 'sys')
+    const surfaceLight = addToken(Surface.light(argbFromHex(source.primary)).toJSON(), 'sys')
+    const surfaceDark = addToken(Surface.dark(argbFromHex(source.primary)).toJSON(), 'sys')
     const surfaceCss = `:root, .light-theme {\n${surfaceLight}}\n.dark-theme {\n${surfaceDark}}`
     surfaceRes = surfaceCss
     setStyle('surface', surfaceCss)
   }
 
   // theme 主题插入
-  const themeRes = applySchemes(theme)
+  const themeRes = applyThemeSchemes(theme)
 
   return [
     {
