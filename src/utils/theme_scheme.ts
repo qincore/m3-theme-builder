@@ -1,4 +1,5 @@
-import { CorePalette } from '@material/material-color-utilities'
+import { ISourceParams } from '@/types/scheme'
+import { PaletteScheme } from '@/utils/palette_scheme'
 
 export interface IThemeSchemeProps {
   primary: number
@@ -32,37 +33,10 @@ export interface IThemeSchemeProps {
   inversePrimary: number
 }
 
-export interface ISourceParams {
-  primary: number
-  secondary?: number
-  tertiary?: number
-  neutral?: number
-}
-
 export class ThemeScheme {
-  private static mergeCorePalette = ({ primary, secondary, tertiary, neutral }: ISourceParams) => {
-    const pCore = CorePalette.of(primary)
-    return {
-      pCore,
-      sCore: secondary ? CorePalette.of(secondary) : pCore,
-      tCore: tertiary ? CorePalette.of(tertiary) : pCore,
-      nCore: neutral ? CorePalette.of(neutral) : pCore
-    }
-  }
-
-  private static mergeTonal = ({
-    secondary,
-    tertiary
-  }: ISourceParams): { sTonal: 'a2' | 'a1'; tTonal: 'a3' | 'a1' } => {
-    return {
-      sTonal: secondary ? 'a1' : 'a2',
-      tTonal: tertiary ? 'a1' : 'a3'
-    }
-  }
-
   static sourceToLight = (source: ISourceParams) => {
-    const { pCore, sCore, tCore, nCore } = this.mergeCorePalette(source)
-    const { sTonal, tTonal } = this.mergeTonal(source)
+    const { pCore, sCore, tCore, nCore } = PaletteScheme.mergeCorePalette(source)
+    const { sTonal, tTonal } = PaletteScheme.mergeTonal(source)
     return new ThemeScheme({
       primary: pCore.a1.tone(40),
       onPrimary: pCore.a1.tone(100),
@@ -97,9 +71,8 @@ export class ThemeScheme {
   }
 
   static sourceToDark = (source: ISourceParams) => {
-    const { pCore, sCore, tCore, nCore } = this.mergeCorePalette(source)
-    const { sTonal, tTonal } = this.mergeTonal(source)
-
+    const { pCore, sCore, tCore, nCore } = PaletteScheme.mergeCorePalette(source)
+    const { sTonal, tTonal } = PaletteScheme.mergeTonal(source)
     return new ThemeScheme({
       primary: pCore.a1.tone(80),
       onPrimary: pCore.a1.tone(20),

@@ -20,7 +20,7 @@ const Dynamic = () => {
       url: ''
     }
   })
-  const { setThemeColor } = useContext(ThemeContext)
+  const { sourceChange } = useContext(ThemeContext)
   const { pathname } = useLocation()
 
   const secMenus = useMemo(() => {
@@ -31,7 +31,6 @@ const Dynamic = () => {
     if (e.target.files) {
       const file = e.target.files[0]
       if (file.size / 1024 > 2048) {
-        // eslint-disable-next-line no-alert
         Dialog.show({
           icon: 'error_outline',
           title: '温馨提示',
@@ -51,7 +50,7 @@ const Dynamic = () => {
     window.scrollTo(0, 0)
     ;(async () => {
       const source = await colorFromImageUrl(image.url, 5)
-      setThemeColor({ primary: hexFromArgb(source) })
+      sourceChange({ primary: hexFromArgb(source) })
     })()
   }, [image])
 

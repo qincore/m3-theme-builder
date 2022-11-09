@@ -5,6 +5,7 @@ import Button from '@/components/Button'
 
 interface IColorPickerProps {
   value: string
+  onOK?: () => void
   onChange?: (c: string) => void
 }
 
@@ -15,8 +16,7 @@ export interface IHctValue {
 }
 
 const ColorPicker = (props: IColorPickerProps) => {
-  const { value, onChange } = props
-
+  const { value, onOK, onChange } = props
   return (
     <div className={styles.colorPicker}>
       <Button
@@ -25,7 +25,8 @@ const ColorPicker = (props: IColorPickerProps) => {
         onClick={() => {
           Dialog.show({
             title: 'HCT 颜色选择',
-            content: <ColorPickerPanel value={value} onChange={(c) => onChange?.(c)} />
+            content: <ColorPickerPanel value={value} onChange={(c) => onChange?.(c)} />,
+            onOK
           })
         }}
       />

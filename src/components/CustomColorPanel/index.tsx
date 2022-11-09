@@ -4,14 +4,15 @@ import { ISourceColor } from '@/utils/theme_utils'
 
 interface ICustomColorPanelProps {
   value: ISourceColor
-  onChange?: (c: ISourceColor) => void
+  onChange?: (c: ISourceColor, dynamic?: boolean) => void
 }
 
 const CustomColorPanel = (props: ICustomColorPanelProps) => {
   const { value, onChange } = props
   const valueChange = (c: string, t: 'primary' | 'secondary' | 'tertiary' | 'neutral') => {
-    onChange?.({ ...value, [t]: c })
+    onChange?.({ ...value, [t]: c }, t === 'primary')
   }
+
   return (
     <div className={styles.customColorPanel}>
       <div className={styles.colorInputWrapper}>

@@ -1,14 +1,8 @@
-import {
-  argbFromHex,
-  redFromArgb,
-  greenFromArgb,
-  blueFromArgb,
-  hexFromArgb,
-  CorePalette,
-  TonalPalette
-} from '@material/material-color-utilities'
+import { argbFromHex, redFromArgb, greenFromArgb, blueFromArgb, hexFromArgb } from '@material/material-color-utilities'
 import { ISurfaceProps, Surface } from '@/utils/surface_scheme'
-import { ISourceParams, ThemeScheme } from './theme_scheme'
+import { ThemeScheme } from './theme_scheme'
+import { ISourceParams } from '@/types/scheme'
+import { PaletteScheme } from '@/utils/palette_scheme'
 
 interface ISchemeProps {
   primary: number
@@ -55,15 +49,16 @@ export interface ISourceColor {
 }
 
 export interface Theme {
-  schemes: { light: ThemeScheme; dark: ThemeScheme }
-  palettes: {
-    primary: TonalPalette
-    secondary: TonalPalette
-    tertiary: TonalPalette
-    neutral: TonalPalette
-    neutralVariant: TonalPalette
-    error: TonalPalette
-  }
+  light: ThemeScheme
+  dark: ThemeScheme
+  // palettes: {
+  //   primary: TonalPalette
+  //   secondary: TonalPalette
+  //   tertiary: TonalPalette
+  //   neutral: TonalPalette
+  //   neutralVariant: TonalPalette
+  //   error: TonalPalette
+  // }
 }
 
 /**
@@ -123,20 +118,9 @@ const addToken = (scheme: ISchemeProps | ISurfaceProps, type: string): string =>
  * @param source
  */
 const sourceColorToTheme = (source: ISourceParams): Theme => {
-  const palette = CorePalette.of(source.primary)
   return {
-    schemes: {
-      light: ThemeScheme.sourceToLight(source),
-      dark: ThemeScheme.sourceToDark(source)
-    },
-    palettes: {
-      primary: palette.a1,
-      secondary: palette.a2,
-      tertiary: palette.a3,
-      neutral: palette.n1,
-      neutralVariant: palette.n2,
-      error: palette.error
-    }
+    light: ThemeScheme.sourceToLight(source),
+    dark: ThemeScheme.sourceToDark(source)
   }
 }
 
@@ -145,8 +129,8 @@ const sourceColorToTheme = (source: ISourceParams): Theme => {
  * @param theme 主题方案
  */
 const applyThemeSchemes = (theme: Theme) => {
-  const light = `:root, .light-theme {\n${addToken(theme.schemes.light.toJSON(), 'sys')}}\n`
-  const dark = `.dark-theme {\n${addToken(theme.schemes.dark.toJSON(), 'sys')}}`
+  const light = `:root, .light-theme {\n${addToken(theme.light.toJSON(), 'sys')}}\n`
+  const dark = `.dark-theme {\n${addToken(theme.dark.toJSON(), 'sys')}}`
   setStyle('theme', `${light}${dark}`)
   return `${light}${dark}`
 }
@@ -156,16 +140,14 @@ const applyThemeSchemes = (theme: Theme) => {
  * @param source 来源颜色 hex
  * @param options 主题可选配置 surface（生成高程面色值）、paletteTones（生成色板色调组）
  */
-export const applyTheme = (
-  source: ISourceColor,
-  options?: { surface?: boolean; paletteTones?: number[] }
-): IThemeCss[] => {
-  const theme = sourceColorToTheme({
+export const applyTheme = (source: ISourceColor, options?: { surface?: boolean; paletteTones?: number[] }) => {
+  const argbSource = {
     primary: argbFromHex(source.primary),
     secondary: source.secondary ? argbFromHex(source.secondary) : undefined,
     tertiary: source.tertiary ? argbFromHex(source.tertiary) : undefined,
     neutral: source.neutral ? argbFromHex(source.neutral) : undefined
-  })
+  }
+  const theme = sourceColorToTheme(argbSource)
 
   let surfaceRes = ''
   let palettesRes = ''
@@ -173,9 +155,11 @@ export const applyTheme = (
   // palettes 色板应用
   if (options?.paletteTones) {
     const tones = options?.paletteTones ?? []
+    const palettes = PaletteScheme.sourceToPalette(argbSource).toJSON()
+
     let token = ''
     // eslint-disable-next-line no-restricted-syntax
-    for (const [key, palette] of Object.entries(theme.palettes)) {
+    for (const [key, palette] of Object.entries(palettes)) {
       const paletteKey = key.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase()
       // eslint-disable-next-line no-restricted-syntax
       for (const tone of tones) {
@@ -199,18 +183,26 @@ export const applyTheme = (
   // theme 主题插入
   const themeRes = applyThemeSchemes(theme)
 
-  return [
-    {
-      type: 'Theme',
-      css: themeRes
+  return {
+    afterColor: {
+      primary: theme.light.toJSON().primary,
+      secondary: theme.light.toJSON().secondary,
+      tertiary: theme.light.toJSON().tertiary,
+      neutral: theme.light.toJSON().onBackground
     },
-    {
-      type: 'Surface',
-      css: surfaceRes
-    },
-    {
-      type: 'Palettes',
-      css: palettesRes
-    }
-  ]
+    css: [
+      {
+        type: 'Theme',
+        css: themeRes
+      },
+      {
+        type: 'Surface',
+        css: surfaceRes
+      },
+      {
+        type: 'Palettes',
+        css: palettesRes
+      }
+    ]
+  }
 }

@@ -8,16 +8,11 @@ import SecNavbar from '@/components/SecNavbar'
 import { MENU } from '@/constants'
 import CustomColorPanel from '@/components/CustomColorPanel'
 import { ThemeContext } from '@/stores/theme'
-import { ISourceColor } from '@/utils/theme_utils'
 
 const Custom = () => {
   const description = '您能够输入自定义主色等，根据输入的颜色将自动分配一组互补色调'
   const { pathname } = useLocation()
-  const { custom, setThemeColor } = useContext(ThemeContext)
-
-  const colorChange = (c: ISourceColor) => {
-    setThemeColor(c)
-  }
+  const { custom, sourceChange } = useContext(ThemeContext)
 
   const secMenus = useMemo(() => {
     return MENU.find((r) => r.path.includes('/custom'))?.children
@@ -38,7 +33,7 @@ const Custom = () => {
           <PageTitleCard pageTitle="自定义" pageDescription={description} />
         </div>
         <div className={styles.colorPanel}>
-          <CustomColorPanel value={custom} onChange={colorChange} />
+          <CustomColorPanel value={custom} onChange={sourceChange} />
         </div>
       </div>
 

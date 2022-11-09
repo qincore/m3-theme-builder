@@ -15,11 +15,12 @@ export interface IDialogProps {
   okText?: string
   cancelText?: string
   onClose?: () => void
-  onCancel?: () => void
+  onOK?: (e: React.MouseEvent<HTMLButtonElement>) => void
+  onCancel?: (e: React.MouseEvent<HTMLButtonElement>) => void
 }
 
 const Dialog = (props: IDialogProps) => {
-  const { icon, title, content, okText, cancelText, onClose, onCancel } = props
+  const { icon, title, content, okText, cancelText, onClose, onCancel, onOK } = props
 
   const [visible, setVisible] = useState<boolean>(false)
   const [en, setEn] = useState<boolean>(false)
@@ -60,16 +61,17 @@ const Dialog = (props: IDialogProps) => {
     }, 300)
   }
 
-  const ok = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const onInOk = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault()
     e.stopPropagation()
+    onOK?.(e)
     close()
   }
 
-  const cancel = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const onInCancel = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault()
     e.stopPropagation()
-    onCancel?.()
+    onCancel?.(e)
     close()
   }
 
@@ -96,10 +98,10 @@ const Dialog = (props: IDialogProps) => {
               <div className={styles.dialogBody}>{content}</div>
               <div className={styles.dialogFooter}>
                 <div className={styles.buttonBar}>
-                  <Button size="small" style={{ marginRight: '8px' }} onClick={(e) => cancel(e)} type="text">
+                  <Button size="small" style={{ marginRight: '8px' }} onClick={onInCancel} type="text">
                     {cancelText}
                   </Button>
-                  <Button size="small" onClick={(e) => ok(e)} type="text">
+                  <Button size="small" onClick={onInOk} type="text">
                     {okText}
                   </Button>
                 </div>
