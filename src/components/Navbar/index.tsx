@@ -8,7 +8,7 @@ import Button from '@/components/Button'
 // import { Dialog } from '@/components/Dialog'
 // import { FOLLOWS } from '@/constants/follows'
 import { IMenuConstants } from '@/types/constants'
-import { ReactComponent as MLogo } from '@/assets/logo.svg'
+import { ReactComponent as MLogo } from '@/assets/app-logo.svg'
 
 interface INavbar {
   pathname: string

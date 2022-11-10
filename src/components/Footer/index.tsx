@@ -1,6 +1,6 @@
 import styles from './style.module.less'
 import { BEIAN } from '@/constants/beian'
-import { ReactComponent as MLogo } from '@/assets/logo.svg'
+import { ReactComponent as MLogo } from '@/assets/app-logo.svg'
 import { FOLLOWS } from '@/constants'
 // import Button from '@/components/Button'
 
