@@ -46,20 +46,20 @@ export const blendColors = (back: number, fore: number, colorMode: 'argb' | 'rgb
   return (((a * 255) << 24) | ((r & 255) << 16) | ((g & 255) << 8) | (b & 255)) >>> 0
 }
 
-/**
- * @description 将 ARGB 转换为 hex WEB颜色字符串.
- * @param argb ARGB 数字.
- * @return Hex 16进制字符串色值, 如：红色 #ff0000.
- */
-export const hexFromArgb = (argb: number): string => {
-  const a = alphaFromArgb(argb)
-  const r = redFromArgb(argb)
-  const g = greenFromArgb(argb)
-  const b = blueFromArgb(argb)
-  const rgbaArr = [r.toString(16), g.toString(16), b.toString(16), a.toString(16)]
-
-  return `#${rgbaArr.map((item) => (item.length === 1 ? `0${item}` : item)).join('')}`
-}
+// /**
+//  * @description 将 ARGB 转换为 hex WEB颜色字符串.
+//  * @param argb ARGB 数字.
+//  * @return Hex 16进制字符串色值, 如：红色 #ff0000.
+//  */
+// export const hexFromArgb = (argb: number): string => {
+//   const a = alphaFromArgb(argb)
+//   const r = redFromArgb(argb)
+//   const g = greenFromArgb(argb)
+//   const b = blueFromArgb(argb)
+//   const rgbaArr = [r.toString(16), g.toString(16), b.toString(16), a.toString(16)]
+//
+//   return `#${rgbaArr.map((item) => (item.length === 1 ? `0${item}` : item)).join('')}`
+// }
 
 /**
  * @description 给 ARGB 添加透明度.
@@ -76,6 +76,11 @@ export const argbAddAlpha = (argb: number, alpha: number): number => {
   return ((a << 24) | ((sr & 255) << 16) | ((sg & 255) << 8) | (sb & 255)) >>> 0
 }
 
+/**
+ * @description 十六进制色值转RGB色值
+ * @param hex 十六进制色值 如 #1677ff.
+ * @return RGB色值数组 如 [255, 243, 68].
+ */
 export const hexToRgb = (hex: string): number[] => {
   return hex
     .replace(/^#?([a-f\d])([a-f\d])([a-f\d])$/i, (_, r, g, b) => `#${r}${r}${g}${g}${b}${b}`)
@@ -84,8 +89,18 @@ export const hexToRgb = (hex: string): number[] => {
     ?.map((x) => parseInt(x, 16)) as number[]
 }
 
+/**
+ * @description RGB色值转十六进制色值.
+ * @param rgb RGB色值数组 如 [255, 243, 68].
+ * @return 十六进制色值 如 #1677ff.
+ */
 export const rgbToHex = (rgb: number[]): string => `#${rgb.map((v) => v.toString(16).padStart(2, '0')).join('')}`
 
+/**
+ * @description 十六进制色值转HCT色值.
+ * @param hex 十六进制色值 如 #1677ff.
+ * @return HCT色值对象(四舍五入到整数) 如 {hue: 354, chroma: 60, tone: 40}.
+ */
 export const hexToHct = (hex: string) => {
   const hct = Hct.fromInt(argbFromHex(hex))
   return { hue: Math.round(hct.hue), chroma: Math.round(hct.chroma), tone: Math.round(hct.tone) }

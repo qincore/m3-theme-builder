@@ -53,7 +53,7 @@ const getPixelArray = (imageData: Uint8ClampedArray, quality: number): number[] 
 }
 /**
  * 从图片获取主色
- * @param image img 元素
+ * @param image img 链接
  * @param quality 采样基数 默认 10（越大越快-精度差、越小越慢-精度高）
  * @return 图片主色
  */

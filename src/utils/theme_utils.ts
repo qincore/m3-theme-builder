@@ -51,14 +51,6 @@ export interface ISourceColor {
 export interface Theme {
   light: ThemeScheme
   dark: ThemeScheme
-  // palettes: {
-  //   primary: TonalPalette
-  //   secondary: TonalPalette
-  //   tertiary: TonalPalette
-  //   neutral: TonalPalette
-  //   neutralVariant: TonalPalette
-  //   error: TonalPalette
-  // }
 }
 
 /**
