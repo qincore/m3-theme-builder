@@ -1,28 +1,92 @@
 .footer {
   text-align: left;
   font-size: 12px;
-  max-width: 1200px;
-  margin: 36px auto 0 auto;
-  padding: 24px 4px 24px 4px;
-  border-top: 1px solid var(--md-sys-color-outline-variant);
+  margin-top: 36px;
+  padding-bottom: 24px;
 
-  a {
-    display: block;
-    line-height: 22px;
-    color: rgba(var(--md-sys-color-on-background-rgb), 0.5);
-    text-decoration: none;
-    font-weight: normal;
-    img {
-      width: 14px;
-      vertical-align: -2px;
+  .wavy {
+    margin-bottom: 32px;
+  }
+  .content {
+    max-width: 1200px;
+    margin: 0 auto;
+    .aboutApp {
+      display: flex;
+      justify-content: space-between;
+      font-size: 16px;
+      line-height: 28px;
+      margin-bottom: 24px;
+      .aboutBlock {
+        padding-right: 50px;
+        .footerLogo {
+          width: 40px;
+          height: 40px;
+          margin-bottom: 12px;
+        }
+        .blockName {
+          font-size: 18px;
+          font-weight: 500;
+          margin-bottom: 20px;
+        }
+        .followItem {
+          svg {
+            display: none;
+          }
+        }
+        &:first-child {
+          width: 500px;
+        }
+      }
+    }
+    .permission {
+      border-top: 1px solid rgba(var(--md-sys-color-outline-rgb), 0.2);
+      padding-top: 24px;
+      a {
+        line-height: 22px;
+        color: rgba(var(--md-sys-color-on-background-rgb), 0.5);
+        text-decoration: none;
+        font-weight: normal;
+        img {
+          width: 14px;
+          vertical-align: -2px;
+        }
+      }
     }
   }
 }
 
-//@media screen and (max-width: 550px) {
-//  .footer {
-//    a{
-//      font-size: 10px;
-//    }
-//  }
-//}
+@media @tablet {
+  .footer {
+    .content {
+      .aboutApp {
+        flex-direction: column;
+        text-align: justify;
+        .aboutBlock {
+          padding-right: 0;
+          .blockName {
+            margin-top: 24px;
+            margin-bottom: 10px;
+          }
+          .followUl {
+            display: flex;
+            .followItem {
+              margin-right: 24px;
+              svg {
+                display: initial;
+                width: 26px;
+                height: 26px;
+              }
+              span:last-child {
+                display: none;
+              }
+            }
+          }
+
+          &:first-child {
+            width: 100%;
+          }
+        }
+      }
+    }
+  }
+}

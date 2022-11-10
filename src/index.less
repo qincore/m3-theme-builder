@@ -1,5 +1,5 @@
 @import 'material-icons/iconfont/material-icons.css';
-@import './styles/normalize.css';
+@import './styles/normalize.less';
 
 #root {
   width: 100%;
@@ -9,6 +9,11 @@
   font-size: 16px;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei',
     'Helvetica Neue', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+}
+
+body {
+  margin: 0;
+  color: var(--md-sys-color-on-surface);
 }
 
 input[type='text'],

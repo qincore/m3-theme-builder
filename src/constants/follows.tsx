@@ -10,17 +10,17 @@ export const FOLLOWS = [
     icon: <GitHubIcon />
   },
   {
-    name: 'BiliBili',
+    name: '哔哩哔哩',
     url: 'https://space.bilibili.com/8667132',
     icon: <BiliIcon />
   },
   {
-    name: 'WeiBo',
+    name: '微博',
     url: 'https://space.bilibili.com/8667132',
     icon: <WeiBoIcon />
   },
   {
-    name: 'MyBlog',
+    name: '个人网站',
     url: 'https://zeir.cc',
     icon: <MyBlog />
   }

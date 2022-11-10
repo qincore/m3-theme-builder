@@ -23,10 +23,6 @@ html {
  * Remove the margin in all browsers.
  */
 
-body {
-  margin: 0;
-}
-
 /**
  * Render the `main` element consistently in IE.
  */
@@ -354,10 +350,29 @@ template {
   display: none;
 }
 
+ul,
+li {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
 a,
 input,
 button {
   outline: none;
   -webkit-tap-highlight-color: rgb(255 255 255 / 0%);
   -webkit-focus-ring-color: rgb(0 0 0 / 0%);
+  text-decoration: none;
+}
+a {
+  color: var(--md-sys-color-primary);
+}
+@media @hover {
+  a {
+    &:hover {
+      color: var(--md-sys-color-tertiary);
+      text-decoration: underline;
+    }
+  }
 }
