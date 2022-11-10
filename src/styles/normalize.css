@@ -7,6 +7,9 @@
  * 1. Correct the line height in all browsers.
  * 2. Prevent adjustments of font size after orientation changes in iOS.
  */
+* {
+  box-sizing: border-box;
+}
 
 html {
   line-height: 1.15; /* 1 */
@@ -349,4 +352,12 @@ template {
 
 [hidden] {
   display: none;
+}
+
+a,
+input,
+button {
+  outline: none;
+  -webkit-tap-highlight-color: rgb(255 255 255 / 0%);
+  -webkit-focus-ring-color: rgb(0 0 0 / 0%);
 }

@@ -5,9 +5,6 @@
   border-radius: 100px;
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
-  &:hover {
-    background-image: linear-gradient(0deg, rgba(68, 71, 70, 0.12), rgba(68, 71, 70, 0.12));
-  }
 }
 .normal {
   height: 40px;
@@ -40,4 +37,20 @@
 
 .noChildren {
   padding: 0 7px;
+}
+
+@media @hover {
+  .button {
+    &:hover {
+      background-image: linear-gradient(0deg, rgba(68, 71, 70, 0.12), rgba(68, 71, 70, 0.12));
+    }
+  }
+}
+
+@media @mobile {
+  .button {
+    &:active {
+      background-image: linear-gradient(0deg, rgba(68, 71, 70, 0.12), rgba(68, 71, 70, 0.12));
+    }
+  }
 }

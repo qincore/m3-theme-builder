@@ -11,7 +11,7 @@ const Layout = () => {
   return (
     <>
       <Navbar pathname={pathname} menu={MENU} />
-      <main className={styles['app-main']}>
+      <main className={styles.main}>
         <AnimatePresence initial={false}>
           <Router />
         </AnimatePresence>
