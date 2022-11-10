@@ -10,7 +10,7 @@ interface ICustomColorPanelProps {
 const CustomColorPanel = (props: ICustomColorPanelProps) => {
   const { value, onChange } = props
   const valueChange = (c: string, t: 'primary' | 'secondary' | 'tertiary' | 'neutral') => {
-    onChange?.({ ...value, [t]: c }, t === 'primary')
+    onChange?.({ primary: value.primary, [t]: c }, t === 'primary')
   }
 
   return (

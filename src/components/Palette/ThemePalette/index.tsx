@@ -17,13 +17,20 @@ const ThemePalette = (props: IThemePaletteProps) => {
       title: color.token,
       content: (
         <div className={styles.colorDetail}>
-          <div className={styles.colorValue}>
-            RGB: {`rgb(${rgb})`}
-            <Clipboard text={`rgb(${rgb})`} />
+          <div style={{ backgroundColor: hex }} className={styles.colorView} />
+          <div className={styles.colorType}>
+            HEX
+            <div className={styles.colorValue}>
+              {hex}
+              <Clipboard text={hex} />
+            </div>
           </div>
-          <div className={styles.colorValue}>
-            HEX: {hex}
-            <Clipboard text={hex} />
+          <div className={styles.colorType}>
+            RGB
+            <div className={styles.colorValue}>
+              {rgb}
+              <Clipboard text={`rgb(${rgb})`} />
+            </div>
           </div>
         </div>
       )

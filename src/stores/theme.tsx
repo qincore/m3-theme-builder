@@ -1,4 +1,4 @@
-import { useLayoutEffect, createContext, useMemo } from 'react'
+import { useLayoutEffect, createContext, useMemo, useEffect } from 'react'
 import { useLocalStorageState } from 'ahooks'
 import { useLocation } from 'react-router-dom'
 import { Hct, hexFromArgb } from '@material/material-color-utilities'
@@ -49,6 +49,8 @@ export const ThemeContextProvider = ({ children }: IThemeContextProviderProps) =
 
   const isCustom = useMemo(() => pathname.includes('/custom'), [pathname])
 
+  const initColor = useMemo(() => (isCustom ? { primary: theme.custom.primary } : theme.dynamic), [isCustom])
+
   const toggleClass = (dark: boolean) => {
     if (dark) {
       document.documentElement.style.colorScheme = 'dark'
@@ -66,25 +68,23 @@ export const ThemeContextProvider = ({ children }: IThemeContextProviderProps) =
   }
 
   const updateTheme = (source: ISourceColor, dynamic?: boolean) => {
-    console.log(source)
     const Tones = [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 95, 99, 100]
     const applyRes = applyTheme(source, { surface: true, paletteTones: Tones })
-    const color = isCustom ? { custom: source } : { dynamic: source }
     if (!dynamic) {
-      console.log(1)
+      const color = isCustom ? { custom: { ...theme.custom, ...source } } : { dynamic: source }
       setTheme({ ...theme, ...color, css: applyRes.css })
     }
     if (isCustom && dynamic) {
-      console.log(2)
       const sHct = Hct.fromInt(applyRes.afterColor.secondary)
       const tHct = Hct.fromInt(applyRes.afterColor.tertiary)
       const nHct = Hct.fromInt(applyRes.afterColor.neutral)
-      const t = {
+      const mColor = {
+        ...source,
         secondary: hexFromArgb(Hct.from(sHct.hue, sHct.chroma, 60).toInt()),
         tertiary: hexFromArgb(Hct.from(tHct.hue, tHct.chroma, 60).toInt()),
         neutral: hexFromArgb(Hct.from(nHct.hue, nHct.chroma, 60).toInt())
       }
-      setTheme({ ...theme, custom: { ...source, ...t } })
+      setTheme({ ...theme, custom: mColor })
     }
   }
 
@@ -101,13 +101,16 @@ export const ThemeContextProvider = ({ children }: IThemeContextProviderProps) =
   }
 
   useLayoutEffect(() => {
-    const color = isCustom ? { primary: theme.custom.primary } : theme.dynamic
-    updateTheme(color, true)
+    updateTheme(initColor, true)
     const systemMode = window.matchMedia('(prefers-color-scheme: dark)')
     toggleClass(theme.dark || systemMode.matches)
     systemMode.addEventListener('change', (e) => {
       toggleClass(e.matches)
     })
+  }, [])
+
+  useEffect(() => {
+    updateTheme(initColor, true)
   }, [isCustom])
 
   return (

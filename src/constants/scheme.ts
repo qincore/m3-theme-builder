@@ -181,38 +181,38 @@ export const SURFACE = [
   [
     {
       token: 'Surface 0',
-      hex: '--md-sys-color-surface0',
-      rgb: '--md-sys-color-surface0-rgb',
+      hex: '--md-sys-color-surface-0',
+      rgb: '--md-sys-color-surface-0-rgb',
       content: '--md-sys-color-on-surface'
     },
     {
       token: 'Surface 1',
-      hex: '--md-sys-color-surface1',
-      rgb: '--md-sys-color-surface1-rgb',
+      hex: '--md-sys-color-surface-1',
+      rgb: '--md-sys-color-surface-1-rgb',
       content: '--md-sys-color-on-surface'
     },
     {
       token: 'Surface 2',
-      hex: '--md-sys-color-surface2',
-      rgb: '--md-sys-color-surface2-rgb',
+      hex: '--md-sys-color-surface-2',
+      rgb: '--md-sys-color-surface-2-rgb',
       content: '--md-sys-color-on-surface'
     },
     {
       token: 'Surface 3',
-      hex: '--md-sys-color-surface3',
-      rgb: '--md-sys-color-surface3-rgb',
+      hex: '--md-sys-color-surface-3',
+      rgb: '--md-sys-color-surface-3-rgb',
       content: '--md-sys-color-on-surface'
     },
     {
       token: 'Surface 4',
-      hex: '--md-sys-color-surface4',
-      rgb: '--md-sys-color-surface4-rgb',
+      hex: '--md-sys-color-surface-4',
+      rgb: '--md-sys-color-surface-4-rgb',
       content: '--md-sys-color-on-surface'
     },
     {
       token: 'Surface 5',
-      hex: '--md-sys-color-surface5',
-      rgb: '--md-sys-color-surface5-rgb',
+      hex: '--md-sys-color-surface-5',
+      rgb: '--md-sys-color-surface-5-rgb',
       content: '--md-sys-color-on-surface'
     }
   ]

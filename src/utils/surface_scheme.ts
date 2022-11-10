@@ -2,12 +2,12 @@ import { CorePalette } from '@material/material-color-utilities'
 import { argbAddAlpha, blendColors } from '@/utils/color_utils'
 
 export interface ISurfaceProps {
-  surface0: number
-  surface1: number
-  surface2: number
-  surface3: number
-  surface4: number
-  surface5: number
+  'surface-0': number
+  'surface-1': number
+  'surface-2': number
+  'surface-3': number
+  'surface-4': number
+  'surface-5': number
 }
 
 export class Surface {
@@ -34,12 +34,12 @@ export class Surface {
    */
   static blendSurface(surface: number, primary: number): Surface {
     return new Surface({
-      surface0: surface,
-      surface1: blendColors(surface, argbAddAlpha(primary, 0.05), 'argb') as number,
-      surface2: blendColors(surface, argbAddAlpha(primary, 0.08), 'argb') as number,
-      surface3: blendColors(surface, argbAddAlpha(primary, 0.11), 'argb') as number,
-      surface4: blendColors(surface, argbAddAlpha(primary, 0.12), 'argb') as number,
-      surface5: blendColors(surface, argbAddAlpha(primary, 0.14), 'argb') as number
+      'surface-0': surface,
+      'surface-1': blendColors(surface, argbAddAlpha(primary, 0.05), 'argb') as number,
+      'surface-2': blendColors(surface, argbAddAlpha(primary, 0.08), 'argb') as number,
+      'surface-3': blendColors(surface, argbAddAlpha(primary, 0.11), 'argb') as number,
+      'surface-4': blendColors(surface, argbAddAlpha(primary, 0.12), 'argb') as number,
+      'surface-5': blendColors(surface, argbAddAlpha(primary, 0.14), 'argb') as number
     })
   }
 
