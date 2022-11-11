@@ -84,7 +84,7 @@ export const ThemeContextProvider = ({ children }: IThemeContextProviderProps) =
         tertiary: hexFromArgb(Hct.from(tHct.hue, tHct.chroma, 60).toInt()),
         neutral: hexFromArgb(Hct.from(nHct.hue, nHct.chroma, 60).toInt())
       }
-      setTheme({ ...theme, custom: mColor })
+      setTheme({ ...theme, custom: mColor, css: applyRes.css })
     }
   }
 

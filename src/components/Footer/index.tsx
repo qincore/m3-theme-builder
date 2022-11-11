@@ -58,7 +58,7 @@ const Footer = () => {
             <div className={styles.blockName}>关注</div>
             <ul className={styles.followUl}>
               {FOLLOWS.map((follow) => (
-                <li>
+                <li key={follow.name}>
                   <a className={styles.followItem} href={follow.url} target="_blank" rel="noreferrer">
                     {follow.icon}
                     <span>{follow.name}</span>
