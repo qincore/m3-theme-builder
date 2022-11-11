@@ -70,7 +70,8 @@ export const ThemeContextProvider = ({ children }: IThemeContextProviderProps) =
   const updateTheme = (source: ISourceColor, dynamic?: boolean) => {
     const Tones = [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 95, 99, 100]
     const applyRes = applyTheme(source, { surface: true, paletteTones: Tones })
-    if (!dynamic) {
+
+    if ((!isCustom && dynamic) || (isCustom && !dynamic)) {
       const color = isCustom ? { custom: { ...theme.custom, ...source } } : { dynamic: source }
       setTheme({ ...theme, ...color, css: applyRes.css })
     }

@@ -1,5 +1,5 @@
 import styles from './style.module.less'
-import { BEIAN } from '@/constants/beian'
+// import { BEIAN } from '@/constants/beian'
 import { ReactComponent as MLogo } from '@/assets/app-logo.svg'
 import { ReactComponent as ZeirLogo } from '@/assets/zeir-text.svg'
 import { FOLLOWS } from '@/constants'
@@ -74,13 +74,14 @@ const Footer = () => {
             <ZeirLogo />
           </div>
           <ul className={styles.permission}>
-            {BEIAN.map((item) => (
-              <li>
-                <a key={item.url} href={item.url} target="_blank" rel="noreferrer">
-                  <img src={item.img} alt="蜀ICP备20006272号-1" /> {item.name}
-                </a>
-              </li>
-            ))}
+            <li>@走心叁次方ZEIR</li>
+            {/* {BEIAN.map((item) => ( */}
+            {/*  <li key={item.url}> */}
+            {/*    <a href={item.url} target="_blank" rel="noreferrer"> */}
+            {/*      <img src={item.img} alt="蜀ICP备20006272号-1" /> {item.name} */}
+            {/*    </a> */}
+            {/*  </li> */}
+            {/* ))} */}
           </ul>
         </div>
       </div>
