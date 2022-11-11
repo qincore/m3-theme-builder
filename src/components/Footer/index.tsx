@@ -1,6 +1,7 @@
 import styles from './style.module.less'
 import { BEIAN } from '@/constants/beian'
 import { ReactComponent as MLogo } from '@/assets/app-logo.svg'
+import { ReactComponent as ZeirLogo } from '@/assets/zeir-text.svg'
 import { FOLLOWS } from '@/constants'
 // import Button from '@/components/Button'
 
@@ -35,7 +36,7 @@ const Footer = () => {
             </div>
           </div>
           <div className={styles.aboutBlock}>
-            <div className={styles.blockName}>更多</div>
+            <div className={styles.blockName}>相关</div>
             <ul className={styles.moreUl}>
               <li>
                 <a className={styles.moreItem} href="https://m3.material.io" target="_blank" rel="noreferrer">
@@ -68,15 +69,20 @@ const Footer = () => {
             </ul>
           </div>
         </div>
-        <ul className={styles.permission}>
-          {BEIAN.map((item) => (
-            <li>
-              <a key={item.url} href={item.url} target="_blank" rel="noreferrer">
-                <img src={item.img} alt="蜀ICP备20006272号-1" /> {item.name}
-              </a>
-            </li>
-          ))}
-        </ul>
+        <div className={styles.subFooter}>
+          <div className={styles.author}>
+            <ZeirLogo />
+          </div>
+          <ul className={styles.permission}>
+            {BEIAN.map((item) => (
+              <li>
+                <a key={item.url} href={item.url} target="_blank" rel="noreferrer">
+                  <img src={item.img} alt="蜀ICP备20006272号-1" /> {item.name}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
     </div>
   )
